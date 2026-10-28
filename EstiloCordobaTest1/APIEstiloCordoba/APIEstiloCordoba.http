@@ -1,0 +1,6 @@
+@APIEstiloCordoba_HostAddress = http://localhost:5078
+
+GET {{APIEstiloCordoba_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

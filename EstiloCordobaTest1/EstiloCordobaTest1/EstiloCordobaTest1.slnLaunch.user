@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "..\\APIEstiloCordoba\\APIEstiloCordoba.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "EstiloCordobaPresentacion.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

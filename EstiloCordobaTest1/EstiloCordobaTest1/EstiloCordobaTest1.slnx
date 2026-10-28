@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="../APIEstiloCordoba/APIEstiloCordoba.csproj" />
+  <Project Path="../EstiloCordobaDatos/EstiloCordobaDatos.csproj" />
+  <Project Path="../EstiloCordobaEF/EstiloCordobaEF.csproj" />
+  <Project Path="../EstiloCordobaEntidades/EstiloCordobaEntidades.csproj" />
+  <Project Path="../EstiloCordobaNegocio/EstiloCordobaNegocio.csproj" />
+  <Project Path="EstiloCordobaPresentacion.csproj" />
+</Solution>
