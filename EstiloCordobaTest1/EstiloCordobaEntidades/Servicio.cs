@@ -16,7 +16,7 @@ namespace EstiloCordobaEntidades
         public string Duracion { get; set; }
 
 
-        [ForeignKey("Categoria")]//EF]
         public int CategoriaId { get; set; }
+
     }
 }

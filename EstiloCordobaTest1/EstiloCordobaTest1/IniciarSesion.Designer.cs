@@ -1,6 +1,6 @@
 ﻿namespace EstiloCordobaTest1
 {
-    partial class Form1
+    partial class IniciarSesion
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IniciarSesion));
             button1 = new Button();
             txtClave = new TextBox();
             txtEmail = new TextBox();
@@ -38,9 +38,11 @@
             // 
             // button1
             // 
-            button1.BackColor = Color.FromArgb(128, 255, 128);
+            button1.BackColor = SystemColors.MenuHighlight;
             button1.FlatStyle = FlatStyle.Popup;
-            button1.Location = new Point(12, 225);
+            button1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = SystemColors.ButtonFace;
+            button1.Location = new Point(12, 223);
             button1.Name = "button1";
             button1.Size = new Size(316, 47);
             button1.TabIndex = 0;
@@ -50,25 +52,27 @@
             // 
             // txtClave
             // 
-            txtClave.Location = new Point(12, 145);
+            txtClave.Location = new Point(12, 154);
             txtClave.Name = "txtClave";
             txtClave.PasswordChar = '●';
             txtClave.Size = new Size(316, 23);
             txtClave.TabIndex = 1;
+            txtClave.Text = "Admin";
             txtClave.UseSystemPasswordChar = true;
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(12, 72);
+            txtEmail.Location = new Point(12, 64);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(316, 23);
             txtEmail.TabIndex = 2;
+            txtEmail.Text = "admin@estilocordoba.com";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 28);
+            label1.Location = new Point(12, 31);
             label1.Name = "label1";
             label1.Size = new Size(68, 30);
             label1.TabIndex = 3;
@@ -78,13 +82,13 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(12, 112);
+            label2.Location = new Point(12, 121);
             label2.Name = "label2";
             label2.Size = new Size(68, 30);
             label2.TabIndex = 4;
             label2.Text = "Clave:";
             // 
-            // Form1
+            // IniciarSesion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -96,7 +100,9 @@
             Controls.Add(button1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "Form1";
+            MaximizeBox = false;
+            Name = "IniciarSesion";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "EstiloCordoba: Iniciar Sesion";
             ResumeLayout(false);
             PerformLayout();

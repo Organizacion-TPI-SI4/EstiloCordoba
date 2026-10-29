@@ -1,17 +1,18 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
+using EstiloCordobaEntidades;
 using EstiloCordobaPresentacion;
 
 namespace EstiloCordobaTest1
 {
-    public partial class Form1 : Form
+    public partial class IniciarSesion : Form
     {
         private static readonly HttpClient cliente = new HttpClient();
 
         private const string urlApi = "https://localhost:7071/api/auth/login";
 
-        public Form1()
+        public IniciarSesion()
         {
             InitializeComponent();
         }
@@ -28,7 +29,7 @@ namespace EstiloCordobaTest1
                     MessageBox.Show("Ingresá tu email y clave.");
                     return;
                 }
-
+                
                 var datosLogin = new
                 {
                     Email = email,
@@ -64,14 +65,24 @@ namespace EstiloCordobaTest1
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
 
-                        if (respuesta.IsSuccessStatusCode && exito)
+                        Session _usuario = new Session
                         {
-                            Form2 formulario = new Form2();
+                            IdEmpleado = raiz.GetProperty("idEmpleado").GetInt32(),
+                            Nombre = raiz.GetProperty("nombre").GetString() ?? "",
+                            IdRol = raiz.GetProperty("idRol").GetInt32()
+                        };
 
-                            formulario.Show();
+                        MenuPrincipal menuPrincipal = new MenuPrincipal(_usuario);
 
-                            this.Hide();
-                        }
+                        menuPrincipal.FormClosed += (s, args) => this.Show();
+
+                        menuPrincipal.Show();
+
+                        txtEmail.Clear();
+                        txtClave.Clear();
+
+                        this.Hide();
+
                     }
                     else
                     {

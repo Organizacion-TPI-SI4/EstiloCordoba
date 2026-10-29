@@ -21,6 +21,35 @@ namespace EstiloCordobaEF.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("EstiloCordobaEntidades.Categoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categorias");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            descripcion = "Corte y Estilizado"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            descripcion = "Colorimetria"
+                        });
+                });
+
             modelBuilder.Entity("EstiloCordobaEntidades.Empleado", b =>
                 {
                     b.Property<int>("Id")
@@ -53,6 +82,8 @@ namespace EstiloCordobaEF.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdRol");
 
                     b.ToTable("Empleados");
 
@@ -129,7 +160,7 @@ namespace EstiloCordobaEF.Migrations
                         new
                         {
                             Id = 2,
-                            Descripcion = "Empleado"
+                            Descripcion = "Recepcionista"
                         });
                 });
 
@@ -158,7 +189,53 @@ namespace EstiloCordobaEF.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoriaId");
+
                     b.ToTable("Servicios");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoriaId = 1,
+                            Duracion = "30 minutos",
+                            Nombre = "Corte de cabello",
+                            Precio = 8000m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoriaId = 2,
+                            Duracion = "120 minutos",
+                            Nombre = "Coloración",
+                            Precio = 25000m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoriaId = 1,
+                            Duracion = "45 minutos",
+                            Nombre = "Peinado",
+                            Precio = 12000m
+                        });
+                });
+
+            modelBuilder.Entity("EstiloCordobaEntidades.Empleado", b =>
+                {
+                    b.HasOne("EstiloCordobaEntidades.Rol", null)
+                        .WithMany()
+                        .HasForeignKey("IdRol")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EstiloCordobaEntidades.Servicio", b =>
+                {
+                    b.HasOne("EstiloCordobaEntidades.Categoria", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

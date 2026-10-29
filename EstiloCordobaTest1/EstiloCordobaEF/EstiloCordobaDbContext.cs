@@ -20,6 +20,8 @@ namespace EstiloCordobaEF
         public DbSet<Servicio> Servicios => Set<Servicio>();
         public DbSet<Rol> Roles => Set<Rol>();
 
+        public DbSet<Categoria> Categorias => Set<Categoria>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -32,6 +34,16 @@ namespace EstiloCordobaEF
                 .Property(s => s.Precio)
                 .HasPrecision(18, 2);
 
+            modelBuilder.Entity<Servicio>()
+                .HasOne<Categoria>()
+                .WithMany()
+                .HasForeignKey(s => s.CategoriaId);
+
+            modelBuilder.Entity<Empleado>()
+                .HasOne<Rol>()
+                .WithMany()
+                .HasForeignKey(e => e.IdRol);
+
             modelBuilder.Entity<Rol>().HasData(
             new Rol
             {
@@ -41,7 +53,7 @@ namespace EstiloCordobaEF
             new Rol
             {
                 Id = 2,
-                Descripcion = "Empleado"
+                Descripcion = "Recepcionista"
             });
 
             modelBuilder.Entity<Empleado>().HasData(
@@ -66,6 +78,38 @@ namespace EstiloCordobaEF
                 IdRol = 2
             }
             );
+
+            modelBuilder.Entity<Servicio>().HasData(
+            new Servicio
+            {
+                Id = 1,
+                Nombre = "Corte de cabello",
+                Precio = 8000m,
+                Duracion = "30 minutos",
+                CategoriaId = 1
+            },
+            new Servicio
+            {
+                Id = 2,
+                Nombre = "Coloración",
+                Precio = 25000m,
+                Duracion = "120 minutos",
+                CategoriaId = 2
+            },
+            new Servicio
+            {
+                Id = 3,
+                Nombre = "Peinado",
+                Precio = 12000m,
+                Duracion = "45 minutos",
+                CategoriaId = 1
+            }
+        );
+
+            modelBuilder.Entity<Categoria>().HasData(
+            new Categoria { Id = 1, descripcion = "Corte y Estilizado" },
+            new Categoria { Id = 2, descripcion = "Colorimetria" }
+        );
         }   
     }
 }
