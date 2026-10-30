@@ -95,6 +95,7 @@
             dgvServicios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvServicios.Location = new Point(200, 33);
             dgvServicios.Name = "dgvServicios";
+            dgvServicios.ReadOnly = true;
             dgvServicios.Size = new Size(588, 405);
             dgvServicios.TabIndex = 1;
             dgvServicios.CellContentClick += dgvServicios_CellContentClick;

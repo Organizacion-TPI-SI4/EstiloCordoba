@@ -74,6 +74,7 @@
             btnRegistrar.TabIndex = 1;
             btnRegistrar.Text = "Registrar";
             btnRegistrar.UseVisualStyleBackColor = true;
+            btnRegistrar.Click += btnRegistrar_Click;
             // 
             // btnModificar
             // 
@@ -89,16 +90,20 @@
             txtBuscar.Location = new Point(200, 12);
             txtBuscar.Name = "txtBuscar";
             txtBuscar.PlaceholderText = "Buscar...";
-            txtBuscar.Size = new Size(256, 23);
+            txtBuscar.Size = new Size(344, 23);
             txtBuscar.TabIndex = 1;
             // 
             // dgvCategorias
             // 
+            dgvCategorias.AllowUserToAddRows = false;
+            dgvCategorias.AllowUserToDeleteRows = false;
             dgvCategorias.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCategorias.Location = new Point(200, 50);
             dgvCategorias.Name = "dgvCategorias";
-            dgvCategorias.Size = new Size(256, 388);
+            dgvCategorias.ReadOnly = true;
+            dgvCategorias.Size = new Size(344, 388);
             dgvCategorias.TabIndex = 2;
+            dgvCategorias.CellContentClick += dgvCategorias_CellContentClick;
             // 
             // bsCategorias
             // 
@@ -108,7 +113,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(474, 450);
+            ClientSize = new Size(556, 450);
             Controls.Add(dgvCategorias);
             Controls.Add(txtBuscar);
             Controls.Add(flowLayoutPanel1);

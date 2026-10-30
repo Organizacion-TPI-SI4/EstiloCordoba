@@ -23,7 +23,6 @@ namespace EstiloCordobaPresentacion
 
             dgvCategorias.DataSource = bsCategorias;
 
-            CargarCategoriasAsync();
         }
 
         private async Task CargarCategoriasAsync()
@@ -55,6 +54,28 @@ namespace EstiloCordobaPresentacion
         private void button1_Click(object sender, EventArgs e)
         {
             CargarCategoriasAsync();
+        }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            foreach (Form formulario in this.MdiParent.MdiChildren)
+            {
+                if (formulario is RegistrarCategoria)
+                {
+                    formulario.BringToFront();
+                    formulario.Activate();
+                    return;
+                }
+            }
+
+            RegistrarCategoria formHijo = new RegistrarCategoria();
+            formHijo.MdiParent = this.MdiParent;
+            formHijo.Show();
+        }
+
+        private void dgvCategorias_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

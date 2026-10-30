@@ -15,10 +15,37 @@ namespace EstiloCordobaDatos
             _contexto = contexto;
         }
 
-        public void RegistrarServicio(Servicio servicio)
+        public bool RegistrarCategoria(Categoria categoria)
         {
-            _contexto.Servicios.Add(servicio);
-            _contexto.SaveChanges();
+            bool existe = _contexto.Categorias.Any(c => c.descripcion.ToLower() == categoria.descripcion.ToLower());
+
+            if (existe)
+            {
+                return false;
+            }
+            else
+            {
+                _contexto.Categorias.Add(categoria);
+                _contexto.SaveChanges();
+                return true;
+            }
+        }
+
+        public bool RegistrarServicio(Servicio servicio)
+        {
+
+            bool existe = _contexto.Servicios.Any(c => c.Nombre.ToLower() == servicio.Nombre.ToLower());
+
+            if (existe)
+            {
+                return false;
+            }
+            else
+            {
+                _contexto.Servicios.Add(servicio);
+                _contexto.SaveChanges();
+                return true;
+            }
         }
 
         public List<Categoria> ObtenerCategorias()

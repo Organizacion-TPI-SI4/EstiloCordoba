@@ -16,11 +16,9 @@ namespace APIEstiloCordoba.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult<LoginResponse> Login(
-            [FromBody] LoginRequest request)
+        public ActionResult<LoginResponse> Login([FromBody] LoginRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.Email) ||
-                string.IsNullOrEmpty(request.Clave))
+            if (string.IsNullOrWhiteSpace(request.Email) ||string.IsNullOrEmpty(request.Clave))
             {
                 return BadRequest(new LoginResponse
                 {

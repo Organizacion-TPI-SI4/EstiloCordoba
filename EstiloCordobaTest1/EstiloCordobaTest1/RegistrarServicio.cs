@@ -43,7 +43,7 @@ namespace EstiloCordobaPresentacion
 
             if (!string.IsNullOrWhiteSpace(txtNombre.Text))
             {
-                if (!string.IsNullOrWhiteSpace(txtDuracion.Text))
+                if (numericUD1.Value > 0)
                 {
                     if (decimal.TryParse(txtPrecio.Text, out decimal precio))
                     {
@@ -58,7 +58,7 @@ namespace EstiloCordobaPresentacion
                             var servicio = new Servicio
                             {
                                 Nombre = txtNombre.Text,
-                                Duracion = txtDuracion.Text,
+                                Duracion = numericUD1.Value.ToString() + " minutos",
                                 Precio = precio,
                                 CategoriaId = idCategoria
                             };
@@ -68,11 +68,14 @@ namespace EstiloCordobaPresentacion
                             if (respuesta.IsSuccessStatusCode)
                             {
                                 MessageBox.Show("Servicio registrado correctamente.");
+                                txtNombre.Clear();
+                                numericUD1.Value = 0;
+                                txtPrecio.Clear();
                             }
                             else
                             {
                                 string error = await respuesta.Content.ReadAsStringAsync();
-                                MessageBox.Show("No se pudo registrar: " + error);
+                                MessageBox.Show("No se pudo registrar: " +error);
                             }
                         }
                     }
@@ -100,6 +103,11 @@ namespace EstiloCordobaPresentacion
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

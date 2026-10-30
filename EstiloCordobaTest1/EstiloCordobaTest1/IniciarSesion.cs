@@ -29,7 +29,7 @@ namespace EstiloCordobaTest1
                     MessageBox.Show("Ingresá tu email y clave.");
                     return;
                 }
-                
+
                 var datosLogin = new
                 {
                     Email = email,
@@ -49,8 +49,7 @@ namespace EstiloCordobaTest1
 
                     JsonElement raiz = documento.RootElement;
 
-                    bool exito = raiz.TryGetProperty("exito", out var propiedadExito)
-                        && propiedadExito.GetBoolean();
+                    bool exito = raiz.TryGetProperty("exito", out var propiedadExito) && propiedadExito.GetBoolean();
 
                     string mensaje =
                         raiz.TryGetProperty("mensaje", out var propiedadMensaje)
@@ -103,6 +102,11 @@ namespace EstiloCordobaTest1
                     MessageBox.Show("La API devolvió una respuesta que no se pudo leer.");
                 }
             }
+        }
+
+        private void IniciarSesion_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

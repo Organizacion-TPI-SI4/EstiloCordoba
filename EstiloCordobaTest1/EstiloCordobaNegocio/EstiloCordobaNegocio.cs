@@ -12,18 +12,22 @@ namespace EstiloCordobaNegocio
             _datos = datos;
         }
 
-        public void RegistrarServicio(Servicio servicio)
+        public bool RegistrarCategoria(Categoria categoria)
         {
-            _datos.RegistrarServicio(servicio);
+            return _datos.RegistrarCategoria(categoria);
+        }
+            
+        public bool RegistrarServicio(Servicio servicio)
+        {
+            return _datos.RegistrarServicio(servicio);
         }
 
 
-            public List<Categoria> ObtenerCategoria()
+        public List<Categoria> ObtenerCategoria()
         {
             return _datos.ObtenerCategorias();
         }
        
-
 
         public List<Servicio> ObtenerServicios()
         {

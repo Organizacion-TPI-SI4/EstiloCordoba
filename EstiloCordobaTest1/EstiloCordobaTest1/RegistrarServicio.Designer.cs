@@ -34,11 +34,12 @@
             btnCancelar = new Button();
             txtNombre = new TextBox();
             label2 = new Label();
-            txtDuracion = new TextBox();
             txtPrecio = new TextBox();
             label3 = new Label();
             cmbCategoria = new ComboBox();
             label4 = new Label();
+            numericUD1 = new NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)numericUD1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -82,9 +83,10 @@
             // 
             // txtNombre
             // 
+            txtNombre.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtNombre.Location = new Point(12, 55);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(344, 23);
+            txtNombre.Size = new Size(344, 27);
             txtNombre.TabIndex = 3;
             // 
             // label2
@@ -93,22 +95,16 @@
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(12, 93);
             label2.Name = "label2";
-            label2.Size = new Size(76, 21);
+            label2.Size = new Size(165, 21);
             label2.TabIndex = 4;
-            label2.Text = "Duracion:";
-            // 
-            // txtDuracion
-            // 
-            txtDuracion.Location = new Point(12, 123);
-            txtDuracion.Name = "txtDuracion";
-            txtDuracion.Size = new Size(165, 23);
-            txtDuracion.TabIndex = 5;
+            label2.Text = "Duracion (en minutos)";
             // 
             // txtPrecio
             // 
+            txtPrecio.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtPrecio.Location = new Point(12, 184);
             txtPrecio.Name = "txtPrecio";
-            txtPrecio.Size = new Size(165, 23);
+            txtPrecio.Size = new Size(165, 27);
             txtPrecio.TabIndex = 6;
             // 
             // label3
@@ -123,10 +119,11 @@
             // 
             // cmbCategoria
             // 
+            cmbCategoria.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbCategoria.FormattingEnabled = true;
             cmbCategoria.Location = new Point(12, 252);
             cmbCategoria.Name = "cmbCategoria";
-            cmbCategoria.Size = new Size(165, 23);
+            cmbCategoria.Size = new Size(165, 28);
             cmbCategoria.TabIndex = 8;
             cmbCategoria.SelectedIndexChanged += cmbCategoria_SelectedIndexChanged;
             // 
@@ -140,16 +137,26 @@
             label4.TabIndex = 9;
             label4.Text = "Categoria:";
             // 
+            // numericUD1
+            // 
+            numericUD1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            numericUD1.Increment = new decimal(new int[] { 5, 0, 0, 0 });
+            numericUD1.Location = new Point(12, 117);
+            numericUD1.Name = "numericUD1";
+            numericUD1.Size = new Size(165, 27);
+            numericUD1.TabIndex = 10;
+            numericUD1.ValueChanged += numericUpDown1_ValueChanged;
+            // 
             // RegistrarServicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(368, 388);
+            Controls.Add(numericUD1);
             Controls.Add(label4);
             Controls.Add(cmbCategoria);
             Controls.Add(label3);
             Controls.Add(txtPrecio);
-            Controls.Add(txtDuracion);
             Controls.Add(label2);
             Controls.Add(txtNombre);
             Controls.Add(btnCancelar);
@@ -161,6 +168,7 @@
             Name = "RegistrarServicio";
             Text = "Registrar servicio";
             Load += RegistrarServicio_Load;
+            ((System.ComponentModel.ISupportInitialize)numericUD1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -172,10 +180,10 @@
         private Button btnCancelar;
         private TextBox txtNombre;
         private Label label2;
-        private TextBox txtDuracion;
         private TextBox txtPrecio;
         private Label label3;
         private ComboBox cmbCategoria;
         private Label label4;
+        private NumericUpDown numericUD1;
     }
 }

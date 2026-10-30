@@ -33,12 +33,14 @@ namespace APIEstiloCordoba.Controllers
         {
             try
             {
-                _negocio.RegistrarServicio(servicio);
-
-                return Ok(new
+                if (_negocio.RegistrarServicio(servicio))
                 {
-                    mensaje = "Servicio registrado correctamente."
-                });
+                    return Ok("Servicio registrado correctamente.");
+                }
+                else
+                {
+                    return Conflict("El servicio ya existe.");
+                }    
             }
             catch (Exception ex)
             {

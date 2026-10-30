@@ -52,21 +52,23 @@
             // 
             // txtClave
             // 
+            txtClave.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtClave.Location = new Point(12, 154);
             txtClave.Name = "txtClave";
             txtClave.PasswordChar = '●';
-            txtClave.Size = new Size(316, 23);
+            txtClave.PlaceholderText = "Ingrese su clave...";
+            txtClave.Size = new Size(316, 29);
             txtClave.TabIndex = 1;
-            txtClave.Text = "Admin";
             txtClave.UseSystemPasswordChar = true;
             // 
             // txtEmail
             // 
+            txtEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtEmail.Location = new Point(12, 64);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(316, 23);
+            txtEmail.PlaceholderText = "Ingrese su email...";
+            txtEmail.Size = new Size(316, 29);
             txtEmail.TabIndex = 2;
-            txtEmail.Text = "admin@estilocordoba.com";
             // 
             // label1
             // 
@@ -104,6 +106,7 @@
             Name = "IniciarSesion";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "EstiloCordoba: Iniciar Sesion";
+            Load += IniciarSesion_Load;
             ResumeLayout(false);
             PerformLayout();
         }
