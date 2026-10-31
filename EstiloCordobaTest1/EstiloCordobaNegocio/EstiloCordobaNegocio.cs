@@ -28,11 +28,16 @@ namespace EstiloCordobaNegocio
             return _datos.RegistrarServicio(servicio);
         }
 
+
+        public List<Cliente> ObtenerClientes()
+        {
+            return _datos.ObtenerClientes();
+        }
+
         public List<Rol> ObtenerRoles()
         {
             return _datos.ObtenerRoles();
         }
-
 
         public List<Categoria> ObtenerCategoria()
         {

@@ -22,6 +22,8 @@ namespace EstiloCordobaEF
 
         public DbSet<Categoria> Categorias => Set<Categoria>();
 
+        public DbSet<Cliente> Clientes => Set<Cliente>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -43,6 +45,11 @@ namespace EstiloCordobaEF
                 .HasOne<Rol>()
                 .WithMany()
                 .HasForeignKey(e => e.IdRol);
+
+            modelBuilder.Entity<Cliente>()
+                .HasOne<Beneficio>()
+                .WithMany()
+                .HasForeignKey(e => e.IdBeneficio);
 
             modelBuilder.Entity<Rol>().HasData(
             new Rol
@@ -113,6 +120,21 @@ namespace EstiloCordobaEF
                 Precio = 12000m,
                 Duracion = "45 minutos",
                 CategoriaId = 1
+            }
+        );
+
+            modelBuilder.Entity<Cliente>().HasData(
+            new Cliente
+            {
+                Id = 1,
+                Nombre = "Cliente de prueba",
+                Apellido = "Apellido de prueba",
+                tipoDni = "A",
+                numeroDni = 12345678,
+                Telefono = "3510000003",
+                Email = "cliente@estilocordoba.com",
+                localidad = "Cordoba",
+                Red_social = "Instagram: @clientedeprueba"
             }
         );
 

@@ -168,6 +168,7 @@
             administracionToolStripMenuItem4.Name = "administracionToolStripMenuItem4";
             administracionToolStripMenuItem4.Size = new Size(190, 26);
             administracionToolStripMenuItem4.Text = "Administracion";
+            administracionToolStripMenuItem4.Click += administracionToolStripMenuItem4_Click;
             // 
             // personalToolStripMenuItem
             // 

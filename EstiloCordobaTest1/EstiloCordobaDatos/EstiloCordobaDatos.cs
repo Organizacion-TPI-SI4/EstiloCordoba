@@ -65,6 +65,11 @@ namespace EstiloCordobaDatos
             }
         }
 
+        public List<Cliente> ObtenerClientes()
+        {
+            return _contexto.Clientes.AsNoTracking().ToList();
+        }
+
         public List<Rol> ObtenerRoles()
         {
             return _contexto.Roles.AsNoTracking().ToList();

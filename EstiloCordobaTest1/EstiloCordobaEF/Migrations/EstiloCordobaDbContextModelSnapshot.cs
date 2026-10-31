@@ -21,6 +21,23 @@ namespace EstiloCordobaEF.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("EstiloCordobaEntidades.Beneficio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Beneficio");
+                });
+
             modelBuilder.Entity("EstiloCordobaEntidades.Categoria", b =>
                 {
                     b.Property<int>("Id")
@@ -47,6 +64,65 @@ namespace EstiloCordobaEF.Migrations
                         {
                             Id = 2,
                             descripcion = "Colorimetria"
+                        });
+                });
+
+            modelBuilder.Entity("EstiloCordobaEntidades.Cliente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("IdBeneficio")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Red_social")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("localidad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("numeroDni")
+                        .HasColumnType("int");
+
+                    b.Property<string>("tipoDni")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdBeneficio");
+
+                    b.ToTable("Clientes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Apellido = "Apellido de prueba",
+                            Email = "cliente@estilocordoba.com",
+                            Nombre = "Cliente de prueba",
+                            Red_social = "Instagram: @clientedeprueba",
+                            Telefono = "3510000003",
+                            localidad = "Cordoba",
+                            numeroDni = 12345678,
+                            tipoDni = "A"
                         });
                 });
 
@@ -228,6 +304,13 @@ namespace EstiloCordobaEF.Migrations
                             Nombre = "Peinado",
                             Precio = 12000m
                         });
+                });
+
+            modelBuilder.Entity("EstiloCordobaEntidades.Cliente", b =>
+                {
+                    b.HasOne("EstiloCordobaEntidades.Beneficio", null)
+                        .WithMany()
+                        .HasForeignKey("IdBeneficio");
                 });
 
             modelBuilder.Entity("EstiloCordobaEntidades.Empleado", b =>
