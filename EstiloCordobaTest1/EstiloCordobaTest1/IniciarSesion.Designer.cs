@@ -59,6 +59,7 @@
             txtClave.PlaceholderText = "Ingrese su clave...";
             txtClave.Size = new Size(316, 29);
             txtClave.TabIndex = 1;
+            txtClave.Text = "Admin";
             txtClave.UseSystemPasswordChar = true;
             // 
             // txtEmail
@@ -69,6 +70,7 @@
             txtEmail.PlaceholderText = "Ingrese su email...";
             txtEmail.Size = new Size(316, 29);
             txtEmail.TabIndex = 2;
+            txtEmail.Text = "admin@estilocordoba.com";
             // 
             // label1
             // 

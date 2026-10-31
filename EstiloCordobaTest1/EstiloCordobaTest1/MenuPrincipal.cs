@@ -22,17 +22,24 @@ namespace EstiloCordobaPresentacion
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
-
-            if (_usuario.IdRol == null)
-            {
-                MessageBox.Show("Usuario no válido. Cerrando la aplicación.");
-                this.Close();
-                return;
-            }
-
             if (_usuario.IdRol == 2)
             {
-                // Recepcionista
+                // Recepcionista no puede acceder a la administración de personal
+                personalToolStripMenuItem.Visible = false;
+            }
+
+            if (_usuario.IdRol == 3)
+            {
+                // Barbero no puede acceder a la administración de personal
+                personalToolStripMenuItem.Visible = false;
+                turnosToolStripMenuItem.Visible = false;
+                serviciosToolStripMenuItem.Visible = false;
+                clientesToolStripMenuItem.Visible = false;
+            }
+
+            if (_usuario.IdRol == 4)
+            {
+                // Compras no puede acceder a la administración de personal
                 personalToolStripMenuItem.Visible = false;
             }
         }
@@ -76,6 +83,23 @@ namespace EstiloCordobaPresentacion
             }
 
             AdministracionCategorias formHijo = new AdministracionCategorias(_usuario);
+            formHijo.MdiParent = this;
+            formHijo.Show();
+        }
+
+        private void administracionToolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            foreach (Form formulario in this.MdiChildren)
+            {
+                if (formulario is AdministracionPersonal)
+                {
+                    formulario.BringToFront();
+                    formulario.Activate();
+                    return;
+                }
+            }
+
+            AdministracionPersonal formHijo = new AdministracionPersonal(_usuario);
             formHijo.MdiParent = this;
             formHijo.Show();
         }

@@ -161,6 +161,16 @@ namespace EstiloCordobaEF.Migrations
                         {
                             Id = 2,
                             Descripcion = "Recepcionista"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Descripcion = "Barbero"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Descripcion = "Compras"
                         });
                 });
 

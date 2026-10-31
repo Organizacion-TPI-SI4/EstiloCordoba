@@ -51,9 +51,9 @@ namespace EstiloCordobaPresentacion
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            CargarCategoriasAsync();
+            await CargarCategoriasAsync();
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)

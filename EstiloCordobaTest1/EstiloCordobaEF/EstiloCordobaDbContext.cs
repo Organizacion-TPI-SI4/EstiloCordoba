@@ -54,6 +54,16 @@ namespace EstiloCordobaEF
             {
                 Id = 2,
                 Descripcion = "Recepcionista"
+            },
+            new Rol
+            {
+                Id = 3,
+                Descripcion = "Barbero"
+            },
+            new Rol
+            {
+                Id = 4,
+                Descripcion = "Compras"
             });
 
             modelBuilder.Entity<Empleado>().HasData(

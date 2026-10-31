@@ -53,7 +53,7 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.BackColor = SystemColors.Menu;
+            menuStrip1.BackColor = SystemColors.MenuBar;
             menuStrip1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             menuStrip1.Items.AddRange(new ToolStripItem[] { menuToolStripMenuItem, turnosToolStripMenuItem, atencionesToolStripMenuItem, serviciosToolStripMenuItem, productosToolStripMenuItem, clientesToolStripMenuItem, personalToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
@@ -181,6 +181,7 @@
             administracionToolStripMenuItem5.Name = "administracionToolStripMenuItem5";
             administracionToolStripMenuItem5.Size = new Size(190, 26);
             administracionToolStripMenuItem5.Text = "Administracion";
+            administracionToolStripMenuItem5.Click += administracionToolStripMenuItem5_Click;
             // 
             // MenuPrincipal
             // 

@@ -22,7 +22,6 @@ namespace EstiloCordobaPresentacion
 
             dgvServicios.DataSource = bsServicios;
 
-            CargarServiciosAsync();
         }
 
         private void AdministracionServicios_Load(object sender, EventArgs e)
@@ -59,9 +58,9 @@ namespace EstiloCordobaPresentacion
 
 
 
-        private void btnConsultar_Click(object sender, EventArgs e)
+        private async void btnConsultar_Click(object sender, EventArgs e)
         {
-            CargarServiciosAsync();
+            await CargarServiciosAsync();
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)

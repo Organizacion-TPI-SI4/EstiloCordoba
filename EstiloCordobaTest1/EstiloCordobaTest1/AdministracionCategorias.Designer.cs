@@ -37,6 +37,8 @@
             txtBuscar = new TextBox();
             dgvCategorias = new DataGridView();
             bsCategorias = new BindingSource(components);
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            descripcionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCategorias).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCategorias).BeginInit();
@@ -97,7 +99,10 @@
             // 
             dgvCategorias.AllowUserToAddRows = false;
             dgvCategorias.AllowUserToDeleteRows = false;
+            dgvCategorias.AutoGenerateColumns = false;
             dgvCategorias.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvCategorias.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, descripcionDataGridViewTextBoxColumn });
+            dgvCategorias.DataSource = bsCategorias;
             dgvCategorias.Location = new Point(200, 50);
             dgvCategorias.Name = "dgvCategorias";
             dgvCategorias.ReadOnly = true;
@@ -108,6 +113,20 @@
             // bsCategorias
             // 
             bsCategorias.DataSource = typeof(EstiloCordobaEntidades.Categoria);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // descripcionDataGridViewTextBoxColumn
+            // 
+            descripcionDataGridViewTextBoxColumn.DataPropertyName = "descripcion";
+            descripcionDataGridViewTextBoxColumn.HeaderText = "descripcion";
+            descripcionDataGridViewTextBoxColumn.Name = "descripcionDataGridViewTextBoxColumn";
+            descripcionDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // AdministracionCategorias
             // 
@@ -139,5 +158,7 @@
         private Button btnRegistrar;
         private Button btnModificar;
         private BindingSource bsCategorias;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn descripcionDataGridViewTextBoxColumn;
     }
 }

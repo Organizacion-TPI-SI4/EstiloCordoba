@@ -12,6 +12,12 @@ namespace EstiloCordobaNegocio
             _datos = datos;
         }
 
+
+        public bool RegistrarEmpleado(Empleado empleado)
+        {
+            return _datos.RegistrarEmpleado(empleado);
+        }
+
         public bool RegistrarCategoria(Categoria categoria)
         {
             return _datos.RegistrarCategoria(categoria);
@@ -20,6 +26,11 @@ namespace EstiloCordobaNegocio
         public bool RegistrarServicio(Servicio servicio)
         {
             return _datos.RegistrarServicio(servicio);
+        }
+
+        public List<Rol> ObtenerRoles()
+        {
+            return _datos.ObtenerRoles();
         }
 
 

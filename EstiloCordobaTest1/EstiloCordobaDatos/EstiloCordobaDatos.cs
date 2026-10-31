@@ -15,6 +15,23 @@ namespace EstiloCordobaDatos
             _contexto = contexto;
         }
 
+        public bool RegistrarEmpleado(Empleado empleado)
+        {
+
+            bool existe = _contexto.Empleados.Any(e => e.Email.ToLower() == empleado.Email.ToLower());
+
+            if (existe)
+            {
+                return false;
+            }
+            else
+            {
+                _contexto.Empleados.Add(empleado);
+                _contexto.SaveChanges();
+                return true;
+            }
+        }
+
         public bool RegistrarCategoria(Categoria categoria)
         {
             bool existe = _contexto.Categorias.Any(c => c.descripcion.ToLower() == categoria.descripcion.ToLower());
@@ -48,37 +65,34 @@ namespace EstiloCordobaDatos
             }
         }
 
+        public List<Rol> ObtenerRoles()
+        {
+            return _contexto.Roles.AsNoTracking().ToList();
+        }
+
         public List<Categoria> ObtenerCategorias()
         {
-            return _contexto.Categorias
-                .AsNoTracking()
-                .ToList();
+            return _contexto.Categorias.AsNoTracking().ToList();
         }
 
 
         //Devuelve la lista de servicios desde la base de datos
         public List<Servicio> ObtenerServicios()
         {
-            return _contexto.Servicios
-                .AsNoTracking()
-                .ToList();
+            return _contexto.Servicios.AsNoTracking().ToList();
         }
 
         //Devuelve la lista de empleados desde la base de datos
         public List<Empleado> ObtenerEmpleados()
         {
-            return _contexto.Empleados
-                .AsNoTracking()
-                .ToList();
+            return _contexto.Empleados.AsNoTracking().ToList();
         }
 
 
         //Devuelve un empleado que cumpla con el criterio.
         public Empleado? ObtenerEmpleadoPorEmail(string email)
         {
-            return _contexto.Empleados
-                .AsNoTracking()
-                .FirstOrDefault(e => e.Email == email);
+            return _contexto.Empleados.AsNoTracking().FirstOrDefault(e => e.Email == email);
         }
     }
 }

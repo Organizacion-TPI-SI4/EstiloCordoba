@@ -22,6 +22,30 @@ namespace APIEstiloCordoba.Controllers
 
                 return Ok(empleados);
             }
+
+
+            [HttpPost]
+            public IActionResult Registrar([FromBody] Empleado empleado)
+            {
+                try
+                {
+                    if (_negocio.RegistrarEmpleado(empleado))
+                    {
+                        return Ok("Empleado registrado correctamente.");
+                    }
+                    else
+                    {
+                        return Conflict("El empleado ya existe.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new
+                    {
+                        mensaje = ex.Message
+                    });
+                }
+            }
         }
     }
 

@@ -29,11 +29,17 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministracionServicios));
             flowLayoutPanel1 = new FlowLayoutPanel();
             btnConsultar = new Button();
             btnRegistrar = new Button();
             btnModificar = new Button();
             dgvServicios = new DataGridView();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            nombreDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            precioDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            duracionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            categoriaIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             bsServicios = new BindingSource(components);
             txtBuscar = new TextBox();
             flowLayoutPanel1.SuspendLayout();
@@ -92,13 +98,51 @@
             // 
             // dgvServicios
             // 
+            dgvServicios.AutoGenerateColumns = false;
             dgvServicios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvServicios.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nombreDataGridViewTextBoxColumn, precioDataGridViewTextBoxColumn, duracionDataGridViewTextBoxColumn, categoriaIdDataGridViewTextBoxColumn });
+            dgvServicios.DataSource = bsServicios;
             dgvServicios.Location = new Point(200, 33);
             dgvServicios.Name = "dgvServicios";
             dgvServicios.ReadOnly = true;
             dgvServicios.Size = new Size(588, 405);
             dgvServicios.TabIndex = 1;
             dgvServicios.CellContentClick += dgvServicios_CellContentClick;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // nombreDataGridViewTextBoxColumn
+            // 
+            nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
+            nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            nombreDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // precioDataGridViewTextBoxColumn
+            // 
+            precioDataGridViewTextBoxColumn.DataPropertyName = "Precio";
+            precioDataGridViewTextBoxColumn.HeaderText = "Precio";
+            precioDataGridViewTextBoxColumn.Name = "precioDataGridViewTextBoxColumn";
+            precioDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // duracionDataGridViewTextBoxColumn
+            // 
+            duracionDataGridViewTextBoxColumn.DataPropertyName = "Duracion";
+            duracionDataGridViewTextBoxColumn.HeaderText = "Duracion";
+            duracionDataGridViewTextBoxColumn.Name = "duracionDataGridViewTextBoxColumn";
+            duracionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // categoriaIdDataGridViewTextBoxColumn
+            // 
+            categoriaIdDataGridViewTextBoxColumn.DataPropertyName = "CategoriaId";
+            categoriaIdDataGridViewTextBoxColumn.HeaderText = "CategoriaId";
+            categoriaIdDataGridViewTextBoxColumn.Name = "categoriaIdDataGridViewTextBoxColumn";
+            categoriaIdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // bsServicios
             // 
@@ -121,6 +165,7 @@
             Controls.Add(dgvServicios);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "AdministracionServicios";
             Text = "Administracion de servicios";
@@ -141,5 +186,10 @@
         private DataGridView dgvServicios;
         private BindingSource bsServicios;
         private TextBox txtBuscar;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn precioDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn duracionDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn categoriaIdDataGridViewTextBoxColumn;
     }
 }

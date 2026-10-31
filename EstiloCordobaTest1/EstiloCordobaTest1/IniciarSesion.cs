@@ -12,6 +12,7 @@ namespace EstiloCordobaTest1
 
         private const string urlApi = "https://localhost:7071/api/auth/login";
 
+
         public IniciarSesion()
         {
             InitializeComponent();
@@ -19,90 +20,89 @@ namespace EstiloCordobaTest1
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            {
-                string email = txtEmail.Text.Trim();
-                string clave = txtClave.Text;
+            button1.Enabled = false;
 
-                if (string.IsNullOrWhiteSpace(email) ||
-                    string.IsNullOrEmpty(clave))
-                {
-                    MessageBox.Show("Ingresá tu email y clave.");
-                    return;
-                }
+                    string email = txtEmail.Text.Trim();
+                    string clave = txtClave.Text;
 
-                var datosLogin = new
-                {
-                    Email = email,
-                    Clave = clave
-                };
-
-                try
-                {
-                    HttpResponseMessage respuesta =
-                        await cliente.PostAsJsonAsync(urlApi, datosLogin);
-
-                    string contenido =
-                        await respuesta.Content.ReadAsStringAsync();
-
-                    using JsonDocument documento =
-                        JsonDocument.Parse(contenido);
-
-                    JsonElement raiz = documento.RootElement;
-
-                    bool exito = raiz.TryGetProperty("exito", out var propiedadExito) && propiedadExito.GetBoolean();
-
-                    string mensaje =
-                        raiz.TryGetProperty("mensaje", out var propiedadMensaje)
-                            ? propiedadMensaje.GetString() ?? ""
-                            : "No se pudo interpretar la respuesta de la API.";
-
-                    if (respuesta.IsSuccessStatusCode && exito)
+                    if (string.IsNullOrWhiteSpace(email) ||
+                        string.IsNullOrEmpty(clave))
                     {
-                        MessageBox.Show(
-                            mensaje,
-                            "Login correcto",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                        MessageBox.Show("Ingresá tu email y clave.");
+                        button1.Enabled = true;
+                        return;
+                    }
 
-                        Session _usuario = new Session
+                    var datosLogin = new
+                    {
+                        Email = email,
+                        Clave = clave
+                    };
+
+                    try
+                    {
+                        HttpResponseMessage respuesta =
+                            await cliente.PostAsJsonAsync(urlApi, datosLogin);
+
+                        string contenido =
+                            await respuesta.Content.ReadAsStringAsync();
+
+                        using JsonDocument documento =
+                            JsonDocument.Parse(contenido);
+
+                        JsonElement raiz = documento.RootElement;
+
+                        bool exito = raiz.TryGetProperty("exito", out var propiedadExito) && propiedadExito.GetBoolean();
+
+                        string mensaje =
+                            raiz.TryGetProperty("mensaje", out var propiedadMensaje)
+                                ? propiedadMensaje.GetString() ?? ""
+                                : "No se pudo interpretar la respuesta de la API.";
+
+                        if (respuesta.IsSuccessStatusCode && exito)
                         {
-                            IdEmpleado = raiz.GetProperty("idEmpleado").GetInt32(),
-                            Nombre = raiz.GetProperty("nombre").GetString() ?? "",
-                            IdRol = raiz.GetProperty("idRol").GetInt32()
-                        };
+                            MessageBox.Show(mensaje,"Login correcto",MessageBoxButtons.OK,MessageBoxIcon.Information);
 
-                        MenuPrincipal menuPrincipal = new MenuPrincipal(_usuario);
+                            Session _usuario = new Session
+                            {
+                                IdEmpleado = raiz.GetProperty("idEmpleado").GetInt32(),
+                                Nombre = raiz.GetProperty("nombre").GetString() ?? "",
+                                IdRol = raiz.GetProperty("idRol").GetInt32()
+                            };
 
-                        menuPrincipal.FormClosed += (s, args) => this.Show();
+                            MenuPrincipal menuPrincipal = new MenuPrincipal(_usuario);
 
-                        menuPrincipal.Show();
+                            menuPrincipal.FormClosed += (s, args) => this.Show();
+                         
+                            menuPrincipal.Show();
 
-                        txtEmail.Clear();
-                        txtClave.Clear();
+                            txtEmail.Clear();
+                            txtClave.Clear();
 
-                        this.Hide();
 
+                            button1.Enabled = true;
+                            this.Hide();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show(mensaje,"Error de inicio de sesión",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                            button1.Enabled = true;
+                }
                     }
-                    else
+                    catch (HttpRequestException)
                     {
-                        MessageBox.Show(
-                            mensaje,
-                            "Error de inicio de sesión",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning);
+                        MessageBox.Show("No se pudo conectar con la API. Verificá que esté ejecutándose.");
+                        button1.Enabled = true;
+                    }
+                    catch (JsonException)
+                    {
+                        MessageBox.Show("La API devolvió una respuesta que no se pudo leer.");
+                        button1.Enabled = true;
                     }
                 }
-                catch (HttpRequestException)
-                {
-                    MessageBox.Show(
-                        "No se pudo conectar con la API. Verificá que esté ejecutándose.");
-                }
-                catch (JsonException)
-                {
-                    MessageBox.Show("La API devolvió una respuesta que no se pudo leer.");
-                }
-            }
-        }
+               
+        
 
         private void IniciarSesion_Load(object sender, EventArgs e)
         {
