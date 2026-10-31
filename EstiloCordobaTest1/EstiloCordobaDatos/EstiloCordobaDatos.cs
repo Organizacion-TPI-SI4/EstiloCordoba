@@ -15,6 +15,23 @@ namespace EstiloCordobaDatos
             _contexto = contexto;
         }
 
+        public bool RegistrarCliente(Cliente cliente)
+        {
+
+            bool existe = _contexto.Clientes.Any(c => c.numeroDni == cliente.numeroDni);
+
+            if (existe)
+            {
+                return false;
+            }
+            else
+            {
+                _contexto.Clientes.Add(cliente);
+                _contexto.SaveChanges();
+                return true;
+            }
+        }
+
         public bool RegistrarEmpleado(Empleado empleado)
         {
 

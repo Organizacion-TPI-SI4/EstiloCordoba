@@ -12,6 +12,11 @@ namespace EstiloCordobaNegocio
             _datos = datos;
         }
 
+        public bool RegistrarCliente(Cliente cliente)
+        {
+            return _datos.RegistrarCliente(cliente);
+        }
+
 
         public bool RegistrarEmpleado(Empleado empleado)
         {

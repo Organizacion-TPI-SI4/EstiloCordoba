@@ -35,8 +35,6 @@
             btnRegistrar = new Button();
             btnModificar = new Button();
             dgvClientes = new DataGridView();
-            txtBuscar = new TextBox();
-            bsClientes = new BindingSource(components);
             nombreDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             apellidoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             tipoDniDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -45,7 +43,8 @@
             emailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             localidadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             redsocialDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            idBeneficioDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bsClientes = new BindingSource(components);
+            txtBuscar = new TextBox();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClientes).BeginInit();
@@ -83,6 +82,7 @@
             btnRegistrar.TabIndex = 1;
             btnRegistrar.Text = "Registrar";
             btnRegistrar.UseVisualStyleBackColor = true;
+            btnRegistrar.Click += btnRegistrar_Click;
             // 
             // btnModificar
             // 
@@ -97,12 +97,73 @@
             // 
             dgvClientes.AutoGenerateColumns = false;
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Columns.AddRange(new DataGridViewColumn[] { nombreDataGridViewTextBoxColumn, apellidoDataGridViewTextBoxColumn, tipoDniDataGridViewTextBoxColumn, numeroDniDataGridViewTextBoxColumn, telefonoDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, localidadDataGridViewTextBoxColumn, redsocialDataGridViewTextBoxColumn, idBeneficioDataGridViewTextBoxColumn });
+            dgvClientes.Columns.AddRange(new DataGridViewColumn[] { nombreDataGridViewTextBoxColumn, apellidoDataGridViewTextBoxColumn, tipoDniDataGridViewTextBoxColumn, numeroDniDataGridViewTextBoxColumn, telefonoDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, localidadDataGridViewTextBoxColumn, redsocialDataGridViewTextBoxColumn });
             dgvClientes.DataSource = bsClientes;
             dgvClientes.Location = new Point(217, 47);
             dgvClientes.Name = "dgvClientes";
+            dgvClientes.ReadOnly = true;
             dgvClientes.Size = new Size(945, 391);
             dgvClientes.TabIndex = 1;
+            // 
+            // nombreDataGridViewTextBoxColumn
+            // 
+            nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
+            nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            nombreDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // apellidoDataGridViewTextBoxColumn
+            // 
+            apellidoDataGridViewTextBoxColumn.DataPropertyName = "Apellido";
+            apellidoDataGridViewTextBoxColumn.HeaderText = "Apellido";
+            apellidoDataGridViewTextBoxColumn.Name = "apellidoDataGridViewTextBoxColumn";
+            apellidoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // tipoDniDataGridViewTextBoxColumn
+            // 
+            tipoDniDataGridViewTextBoxColumn.DataPropertyName = "tipoDni";
+            tipoDniDataGridViewTextBoxColumn.HeaderText = "tipoDni";
+            tipoDniDataGridViewTextBoxColumn.Name = "tipoDniDataGridViewTextBoxColumn";
+            tipoDniDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // numeroDniDataGridViewTextBoxColumn
+            // 
+            numeroDniDataGridViewTextBoxColumn.DataPropertyName = "numeroDni";
+            numeroDniDataGridViewTextBoxColumn.HeaderText = "numeroDni";
+            numeroDniDataGridViewTextBoxColumn.Name = "numeroDniDataGridViewTextBoxColumn";
+            numeroDniDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // telefonoDataGridViewTextBoxColumn
+            // 
+            telefonoDataGridViewTextBoxColumn.DataPropertyName = "Telefono";
+            telefonoDataGridViewTextBoxColumn.HeaderText = "Telefono";
+            telefonoDataGridViewTextBoxColumn.Name = "telefonoDataGridViewTextBoxColumn";
+            telefonoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // emailDataGridViewTextBoxColumn
+            // 
+            emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
+            emailDataGridViewTextBoxColumn.HeaderText = "Email";
+            emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            emailDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // localidadDataGridViewTextBoxColumn
+            // 
+            localidadDataGridViewTextBoxColumn.DataPropertyName = "localidad";
+            localidadDataGridViewTextBoxColumn.HeaderText = "localidad";
+            localidadDataGridViewTextBoxColumn.Name = "localidadDataGridViewTextBoxColumn";
+            localidadDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // redsocialDataGridViewTextBoxColumn
+            // 
+            redsocialDataGridViewTextBoxColumn.DataPropertyName = "Red_social";
+            redsocialDataGridViewTextBoxColumn.HeaderText = "Red_social";
+            redsocialDataGridViewTextBoxColumn.Name = "redsocialDataGridViewTextBoxColumn";
+            redsocialDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // bsClientes
+            // 
+            bsClientes.DataSource = typeof(EstiloCordobaEntidades.Cliente);
             // 
             // txtBuscar
             // 
@@ -111,64 +172,6 @@
             txtBuscar.PlaceholderText = "Buscar...";
             txtBuscar.Size = new Size(943, 23);
             txtBuscar.TabIndex = 2;
-            // 
-            // bsClientes
-            // 
-            bsClientes.DataSource = typeof(EstiloCordobaEntidades.Cliente);
-            // 
-            // nombreDataGridViewTextBoxColumn
-            // 
-            nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
-            nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
-            nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
-            // 
-            // apellidoDataGridViewTextBoxColumn
-            // 
-            apellidoDataGridViewTextBoxColumn.DataPropertyName = "Apellido";
-            apellidoDataGridViewTextBoxColumn.HeaderText = "Apellido";
-            apellidoDataGridViewTextBoxColumn.Name = "apellidoDataGridViewTextBoxColumn";
-            // 
-            // tipoDniDataGridViewTextBoxColumn
-            // 
-            tipoDniDataGridViewTextBoxColumn.DataPropertyName = "tipoDni";
-            tipoDniDataGridViewTextBoxColumn.HeaderText = "tipoDni";
-            tipoDniDataGridViewTextBoxColumn.Name = "tipoDniDataGridViewTextBoxColumn";
-            // 
-            // numeroDniDataGridViewTextBoxColumn
-            // 
-            numeroDniDataGridViewTextBoxColumn.DataPropertyName = "numeroDni";
-            numeroDniDataGridViewTextBoxColumn.HeaderText = "numeroDni";
-            numeroDniDataGridViewTextBoxColumn.Name = "numeroDniDataGridViewTextBoxColumn";
-            // 
-            // telefonoDataGridViewTextBoxColumn
-            // 
-            telefonoDataGridViewTextBoxColumn.DataPropertyName = "Telefono";
-            telefonoDataGridViewTextBoxColumn.HeaderText = "Telefono";
-            telefonoDataGridViewTextBoxColumn.Name = "telefonoDataGridViewTextBoxColumn";
-            // 
-            // emailDataGridViewTextBoxColumn
-            // 
-            emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
-            emailDataGridViewTextBoxColumn.HeaderText = "Email";
-            emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
-            // 
-            // localidadDataGridViewTextBoxColumn
-            // 
-            localidadDataGridViewTextBoxColumn.DataPropertyName = "localidad";
-            localidadDataGridViewTextBoxColumn.HeaderText = "localidad";
-            localidadDataGridViewTextBoxColumn.Name = "localidadDataGridViewTextBoxColumn";
-            // 
-            // redsocialDataGridViewTextBoxColumn
-            // 
-            redsocialDataGridViewTextBoxColumn.DataPropertyName = "Red_social";
-            redsocialDataGridViewTextBoxColumn.HeaderText = "Red_social";
-            redsocialDataGridViewTextBoxColumn.Name = "redsocialDataGridViewTextBoxColumn";
-            // 
-            // idBeneficioDataGridViewTextBoxColumn
-            // 
-            idBeneficioDataGridViewTextBoxColumn.DataPropertyName = "idBeneficio";
-            idBeneficioDataGridViewTextBoxColumn.HeaderText = "idBeneficio";
-            idBeneficioDataGridViewTextBoxColumn.Name = "idBeneficioDataGridViewTextBoxColumn";
             // 
             // AdministracionClientes
             // 

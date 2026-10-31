@@ -23,5 +23,28 @@ namespace APIEstiloCordoba.Controllers
 
             return Ok(clientes);
         }
+
+        [HttpPost]
+        public IActionResult Registrar([FromBody] Cliente cliente)
+        {
+            try
+            {
+                if (_negocio.RegistrarCliente(cliente))
+                {
+                    return Ok("Cliente registrado correctamente.");
+                }
+                else
+                {
+                    return Conflict("El cliente ya existe.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensaje = ex.Message
+                });
+            }
+        }
     }
 }

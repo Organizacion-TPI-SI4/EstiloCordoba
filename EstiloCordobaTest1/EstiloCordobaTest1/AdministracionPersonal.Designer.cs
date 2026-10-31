@@ -108,6 +108,7 @@
             dgvEmpleados.DataSource = bsEmpleados;
             dgvEmpleados.Location = new Point(216, 51);
             dgvEmpleados.Name = "dgvEmpleados";
+            dgvEmpleados.ReadOnly = true;
             dgvEmpleados.Size = new Size(750, 387);
             dgvEmpleados.TabIndex = 2;
             dgvEmpleados.CellContentClick += dgvEmpleados_CellContentClick;
@@ -117,42 +118,49 @@
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
             idDataGridViewTextBoxColumn.HeaderText = "Id";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // nombreDataGridViewTextBoxColumn
             // 
             nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
             nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
             nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            nombreDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // domicilioDataGridViewTextBoxColumn
             // 
             domicilioDataGridViewTextBoxColumn.DataPropertyName = "Domicilio";
             domicilioDataGridViewTextBoxColumn.HeaderText = "Domicilio";
             domicilioDataGridViewTextBoxColumn.Name = "domicilioDataGridViewTextBoxColumn";
+            domicilioDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // telefonoDataGridViewTextBoxColumn
             // 
             telefonoDataGridViewTextBoxColumn.DataPropertyName = "Telefono";
             telefonoDataGridViewTextBoxColumn.HeaderText = "Telefono";
             telefonoDataGridViewTextBoxColumn.Name = "telefonoDataGridViewTextBoxColumn";
+            telefonoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // emailDataGridViewTextBoxColumn
             // 
             emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
             emailDataGridViewTextBoxColumn.HeaderText = "Email";
             emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            emailDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // claveDataGridViewTextBoxColumn
             // 
             claveDataGridViewTextBoxColumn.DataPropertyName = "Clave";
             claveDataGridViewTextBoxColumn.HeaderText = "Clave";
             claveDataGridViewTextBoxColumn.Name = "claveDataGridViewTextBoxColumn";
+            claveDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // idRolDataGridViewTextBoxColumn
             // 
             idRolDataGridViewTextBoxColumn.DataPropertyName = "IdRol";
             idRolDataGridViewTextBoxColumn.HeaderText = "IdRol";
             idRolDataGridViewTextBoxColumn.Name = "idRolDataGridViewTextBoxColumn";
+            idRolDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // bsEmpleados
             // 

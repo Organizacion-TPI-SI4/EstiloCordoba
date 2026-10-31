@@ -42,5 +42,22 @@ namespace EstiloCordobaPresentacion
                 MessageBox.Show($"No se pudieron cargar los clientes: {ex.Message}");
             }
         }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            foreach (Form formulario in this.MdiParent.MdiChildren)
+            {
+                if (formulario is RegistrarCliente)
+                {
+                    formulario.BringToFront();
+                    formulario.Activate();
+                    return;
+                }
+            }
+
+            RegistrarCliente formHijo = new RegistrarCliente();
+            formHijo.MdiParent = this.MdiParent;
+            formHijo.Show();
+        }
     }
 }
