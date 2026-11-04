@@ -12,11 +12,15 @@ namespace EstiloCordobaNegocio
             _datos = datos;
         }
 
+        public bool RegistrarTurno(Turno turno)
+        {
+            return _datos.RegistrarTurno(turno);
+        }
+
         public bool RegistrarCliente(Cliente cliente)
         {
             return _datos.RegistrarCliente(cliente);
         }
-
 
         public bool RegistrarEmpleado(Empleado empleado)
         {
@@ -42,6 +46,12 @@ namespace EstiloCordobaNegocio
         public List<Rol> ObtenerRoles()
         {
             return _datos.ObtenerRoles();
+        }
+
+
+        public List<Turno> ObtenerTurnos()
+        {
+            return _datos.ObtenerTurnos();
         }
 
         public List<Categoria> ObtenerCategoria()

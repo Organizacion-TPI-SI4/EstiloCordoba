@@ -13,6 +13,9 @@
     <Compile Update="AdministracionServicios.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="AdministracionTurnos.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="IniciarSesion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -29,6 +32,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="RegistrarServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RegistrarTurno.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

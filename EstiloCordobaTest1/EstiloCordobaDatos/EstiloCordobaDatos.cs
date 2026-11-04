@@ -15,6 +15,13 @@ namespace EstiloCordobaDatos
             _contexto = contexto;
         }
 
+        public bool RegistrarTurno(Turno turno)
+        {
+                _contexto.Turnos.Add(turno);
+                _contexto.SaveChanges();
+                return true;   
+        }
+
         public bool RegistrarCliente(Cliente cliente)
         {
 
@@ -80,6 +87,13 @@ namespace EstiloCordobaDatos
                 _contexto.SaveChanges();
                 return true;
             }
+        }
+
+        public List<Turno> ObtenerTurnos()
+        {
+            return _contexto.Turnos.Include(t => t.usuario).Include(t => t.cliente).Include(t => t.DetallesTurno).ThenInclude(d => d.servicio)
+            .AsNoTracking()
+            .ToList();
         }
 
         public List<Cliente> ObtenerClientes()

@@ -120,5 +120,27 @@ namespace EstiloCordobaPresentacion
             formHijo.MdiParent = this;
             formHijo.Show();
         }
+
+        private void administracionToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void administracionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form formulario in this.MdiChildren)
+            {
+                if (formulario is AdministracionTurnos)
+                {
+                    formulario.BringToFront();
+                    formulario.Activate();
+                    return;
+                }
+            }
+
+            AdministracionTurnos formHijo = new AdministracionTurnos(_usuario);
+            formHijo.MdiParent = this;
+            formHijo.Show();
+        }
     }
 }

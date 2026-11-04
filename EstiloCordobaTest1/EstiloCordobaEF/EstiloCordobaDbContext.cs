@@ -19,10 +19,10 @@ namespace EstiloCordobaEF
         public DbSet<Producto> Productos => Set<Producto>();
         public DbSet<Servicio> Servicios => Set<Servicio>();
         public DbSet<Rol> Roles => Set<Rol>();
-
         public DbSet<Categoria> Categorias => Set<Categoria>();
-
         public DbSet<Cliente> Clientes => Set<Cliente>();
+        public DbSet<Turno> Turnos => Set<Turno>();
+        public DbSet<DetTurno> DetallesTurno => Set<DetTurno>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,26 @@ namespace EstiloCordobaEF
                 .HasOne<Beneficio>()
                 .WithMany()
                 .HasForeignKey(e => e.IdBeneficio);
+
+            modelBuilder.Entity<DetTurno>() 
+                .HasOne(d => d.turno)
+                .WithMany(t => t.DetallesTurno)
+                .HasForeignKey(d => d.idTurnoPadre);
+
+            modelBuilder.Entity<DetTurno>()
+                .HasOne(d => d.servicio)
+                .WithMany()
+                .HasForeignKey(d => d.idServicio);
+
+            modelBuilder.Entity<Turno>()
+                .HasOne(t => t.usuario)
+                .WithMany()
+                .HasForeignKey(t => t.idUsuario);
+
+            modelBuilder.Entity<Turno>()
+                .HasOne(t => t.cliente)
+                .WithMany()
+                .HasForeignKey(t => t.idCliente);
 
             modelBuilder.Entity<Rol>().HasData(
             new Rol
