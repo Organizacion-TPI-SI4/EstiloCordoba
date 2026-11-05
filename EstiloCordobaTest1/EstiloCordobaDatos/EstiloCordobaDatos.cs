@@ -89,6 +89,29 @@ namespace EstiloCordobaDatos
             }
         }
 
+        public bool RegistrarProducto(Producto producto)
+        {
+            bool existe = _contexto.Productos.Any(p =>
+                p.Nombre.ToLower() == producto.Nombre.ToLower() &&
+                p.Marca.ToLower() == producto.Marca.ToLower());
+
+            if (existe)
+            {
+                return false;
+            }
+
+            _contexto.Productos.Add(producto);
+            _contexto.SaveChanges();
+            return true;
+        }
+
+        public List<Producto> ObtenerProductos()
+        {
+            return _contexto.Productos
+                .AsNoTracking()
+                .ToList();
+        }
+
         public List<Turno> ObtenerTurnos()
         {
             return _contexto.Turnos.Include(t => t.usuario).Include(t => t.cliente).Include(t => t.DetallesTurno).ThenInclude(d => d.servicio)
