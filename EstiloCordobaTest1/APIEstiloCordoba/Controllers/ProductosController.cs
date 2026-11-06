@@ -50,5 +50,49 @@ namespace APIEstiloCordoba.Controllers
                 });
             }
         }
+        [HttpPut("{id:int}")]
+        public IActionResult Modificar(
+    int id,
+    [FromBody] Producto producto)
+        {
+            try
+            {
+                if (id != producto.Id)
+                {
+                    return BadRequest(new
+                    {
+                        mensaje = "El identificador del producto no coincide."
+                    });
+                }
+
+                if (_negocio.ModificarProducto(producto))
+                {
+                    return Ok("Producto modificado correctamente.");
+                }
+
+                return Conflict(
+                    "No se pudo modificar el producto. " +
+                    "Verificá que exista y que no haya otro " +
+                    "con el mismo nombre y marca.");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    mensaje = ex.Message
+                });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new
+                {
+                    mensaje = "Ocurrió un error al modificar el producto."
+                });
+            }
+        }
+
+
+
     }
+
 }

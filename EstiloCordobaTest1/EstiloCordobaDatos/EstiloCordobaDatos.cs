@@ -105,6 +105,38 @@ namespace EstiloCordobaDatos
             return true;
         }
 
+
+        public bool ModificarProducto(Producto producto)
+        {
+            Producto? productoExistente = _contexto.Productos
+                .FirstOrDefault(p => p.Id == producto.Id);
+
+            if (productoExistente == null)
+            {
+                return false;
+            }
+
+            bool existeDuplicado = _contexto.Productos.Any(p =>
+                p.Id != producto.Id &&
+                p.Nombre.ToLower() == producto.Nombre.ToLower() &&
+                p.Marca.ToLower() == producto.Marca.ToLower());
+
+            if (existeDuplicado)
+            {
+                return false;
+            }
+
+            productoExistente.Nombre = producto.Nombre.Trim();
+            productoExistente.Marca = producto.Marca.Trim();
+            productoExistente.PrecioVenta = producto.PrecioVenta;
+            productoExistente.Stock = producto.Stock;
+
+            _contexto.SaveChanges();
+            return true;
+        }
+
+
+
         public List<Producto> ObtenerProductos()
         {
             return _contexto.Productos
