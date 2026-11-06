@@ -22,6 +22,52 @@ namespace EstiloCordobaEF.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("EstiloCordobaEntidades.Atencion", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<DateOnly>("fecha")
+                        .HasColumnType("date");
+
+                    b.Property<TimeOnly>("hora")
+                        .HasColumnType("time");
+
+                    b.Property<int?>("idBarbero")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idCliente")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idEstado")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("idMedioPago")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idTurno")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("totalCalculado")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("totalProductos")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("totalServicios")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Atenciones");
+                });
+
             modelBuilder.Entity("EstiloCordobaEntidades.Beneficio", b =>
                 {
                     b.Property<int>("Id")

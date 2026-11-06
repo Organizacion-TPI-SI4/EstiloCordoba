@@ -15,6 +15,28 @@ namespace EstiloCordobaDatos
             _contexto = contexto;
         }
 
+        public bool RegistrarAtencion(Atencion atencion)
+        {
+            bool existe = _contexto.Atenciones
+        .Any(a => a.idTurno == atencion.idTurno);
+
+            if (existe)
+                return false;
+
+            try
+            {
+                _contexto.Atenciones.Add(atencion);
+                _contexto.SaveChanges();
+
+                return true;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception(
+                    "Error SQL: " + ex.InnerException?.Message, ex);
+            }
+        }
+
         public bool RegistrarTurno(Turno turno)
         {
                 _contexto.Turnos.Add(turno);
@@ -96,6 +118,23 @@ namespace EstiloCordobaDatos
             .ToList();
         }
 
+        public Turno ObtenerTurnoPorId(int id)
+        {
+            if(!_contexto.Turnos.Any(t => t.id == id))
+            {
+                return null;
+            }
+            else
+            {
+                return _contexto.Turnos.AsNoTracking().Include(t => t.cliente).FirstOrDefault(t => t.id == id);
+            }   
+        }
+
+        public List<Atencion> ObtenerAtenciones()
+        {
+            return _contexto.Atenciones.AsNoTracking().ToList();
+        }
+
         public List<Cliente> ObtenerClientes()
         {
             return _contexto.Clientes.AsNoTracking().ToList();
@@ -111,11 +150,21 @@ namespace EstiloCordobaDatos
             return _contexto.Categorias.AsNoTracking().ToList();
         }
 
+        public List<DetTurno> ObtenerDetallesTurno(int id)
+        {
+            return _contexto.DetallesTurno.AsNoTracking().Where(d => d.idTurnoPadre == id).ToList();
+        }
+
 
         //Devuelve la lista de servicios desde la base de datos
         public List<Servicio> ObtenerServicios()
         {
             return _contexto.Servicios.AsNoTracking().ToList();
+        }
+
+        public Servicio ObtenerServiciosPorId(int id)
+        {
+            return _contexto.Servicios.AsNoTracking().FirstOrDefault(s => s.Id == id);
         }
 
         //Devuelve la lista de empleados desde la base de datos

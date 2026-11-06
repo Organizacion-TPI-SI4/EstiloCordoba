@@ -12,6 +12,11 @@ namespace EstiloCordobaNegocio
             _datos = datos;
         }
 
+        public bool RegistrarAtencion(Atencion atencion)
+        {
+            return _datos.RegistrarAtencion(atencion);
+        }
+
         public bool RegistrarTurno(Turno turno)
         {
             return _datos.RegistrarTurno(turno);
@@ -34,9 +39,20 @@ namespace EstiloCordobaNegocio
             
         public bool RegistrarServicio(Servicio servicio)
         {
-            return _datos.RegistrarServicio(servicio);
+            if (servicio.Precio == 0 || servicio.Precio < 0)
+            {
+                return false;
+            }
+            else
+            {
+                return _datos.RegistrarServicio(servicio);
+            }  
         }
 
+        public List<Atencion> ObtenerAtenciones()
+        {
+            return _datos.ObtenerAtenciones();
+        }
 
         public List<Cliente> ObtenerClientes()
         {
@@ -54,6 +70,16 @@ namespace EstiloCordobaNegocio
             return _datos.ObtenerTurnos();
         }
 
+        public Turno ObtenerTurnoPorId(int id)
+        {
+            return _datos.ObtenerTurnoPorId(id);
+        }
+
+        public List<DetTurno> ObtenerDetallesTurno(int id)
+        {
+            return _datos.ObtenerDetallesTurno(id);
+        }
+
         public List<Categoria> ObtenerCategoria()
         {
             return _datos.ObtenerCategorias();
@@ -63,6 +89,11 @@ namespace EstiloCordobaNegocio
         public List<Servicio> ObtenerServicios()
         {
             return _datos.ObtenerServicios();
+        }
+
+        public Servicio ObtenerServiciosPorId(int id)
+        {
+            return _datos.ObtenerServiciosPorId(id);
         }
 
         public List<Empleado> ObtenerEmpleados()
@@ -81,5 +112,7 @@ namespace EstiloCordobaNegocio
 
             return empleado;
         }
+
+
     }
 }

@@ -151,8 +151,6 @@ namespace EstiloCordobaPresentacion
                 string error = await respuesta.Content.ReadAsStringAsync();
                 MessageBox.Show(error);
             }
-
-            
         }
     }
 }

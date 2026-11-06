@@ -22,6 +22,17 @@ namespace APIEstiloCordoba.Controllers
             return Ok(turnos);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult ObtenerTurnosPorId(int id)
+        {
+            Turno turno = _negocio.ObtenerTurnoPorId(id);
+
+            if (turno == null)
+                return NotFound("No se encontró el turno.");
+
+            return Ok(turno);
+        }
+
         [HttpPost]
         public IActionResult Registrar([FromBody] Turno turno)
         {

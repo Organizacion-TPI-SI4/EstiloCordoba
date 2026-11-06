@@ -26,6 +26,17 @@ namespace APIEstiloCordoba.Controllers
             return Ok(servicios);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult ObtenerServiciosPorId(int id)
+        {
+            var servicio = _negocio.ObtenerServiciosPorId(id);
+
+            if (servicio == null)
+                return NotFound("No se encontró el servicio.");
+
+            return Ok(servicio);
+        }
+
 
         //Este post envia informacion desde la API a la capa de negocios.
         [HttpPost]

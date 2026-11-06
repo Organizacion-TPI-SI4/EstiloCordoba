@@ -123,7 +123,19 @@ namespace EstiloCordobaPresentacion
 
         private void administracionToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            
+            foreach (Form formulario in this.MdiChildren)
+            {
+                if (formulario is AdministracionAtenciones)
+                {
+                    formulario.BringToFront();
+                    formulario.Activate();
+                    return;
+                }
+            }
+
+            AdministracionAtenciones formHijo = new AdministracionAtenciones(_usuario);
+            formHijo.MdiParent = this;
+            formHijo.Show();
         }
 
         private void administracionToolStripMenuItem_Click(object sender, EventArgs e)

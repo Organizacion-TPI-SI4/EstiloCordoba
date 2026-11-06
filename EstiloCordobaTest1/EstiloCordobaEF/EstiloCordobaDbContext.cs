@@ -24,6 +24,8 @@ namespace EstiloCordobaEF
         public DbSet<Turno> Turnos => Set<Turno>();
         public DbSet<DetTurno> DetallesTurno => Set<DetTurno>();
 
+        public DbSet<Atencion> Atenciones => Set<Atencion>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -70,6 +72,18 @@ namespace EstiloCordobaEF
                 .HasOne(t => t.cliente)
                 .WithMany()
                 .HasForeignKey(t => t.idCliente);
+
+            modelBuilder.Entity<Atencion>()
+                .Property(a => a.totalCalculado)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Atencion>()
+                .Property(a => a.totalServicios)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Atencion>()
+                .Property(a => a.totalProductos)
+                .HasPrecision(18, 2);
 
             modelBuilder.Entity<Rol>().HasData(
             new Rol
