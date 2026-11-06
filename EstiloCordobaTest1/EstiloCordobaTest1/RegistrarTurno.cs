@@ -114,19 +114,19 @@ namespace EstiloCordobaPresentacion
                 return;
             }
 
-            TimeOnly.TryParse(txtHora.Text, out TimeOnly hora);
-
-            if (hora < TimeOnly.FromDateTime(DateTime.Now))
-            {
-                MessageBox.Show("La hora del turno no puede ser anterior a la hora actual.");
-                return;
-            }
-
             if (!TimeOnly.TryParse(txtHora.Text, out TimeOnly horaSeleccionada))
             {
                 MessageBox.Show("Ingresá una hora válida (HH:mm).");
                 return;
             }
+
+            if (horaSeleccionada < TimeOnly.FromDateTime(DateTime.Now))
+            {
+                MessageBox.Show("La hora del turno no puede ser anterior a la hora actual.");
+                return;
+            }
+
+            
 
 
             List<DetTurno> detalles = new List<DetTurno>();
