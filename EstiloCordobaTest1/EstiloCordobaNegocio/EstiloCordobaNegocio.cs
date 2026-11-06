@@ -49,6 +49,40 @@ namespace EstiloCordobaNegocio
             }  
         }
 
+        public bool RegistrarProducto(Producto producto)
+        {
+            producto.Nombre = producto.Nombre.Trim();
+            producto.Marca = producto.Marca.Trim();
+
+            if (string.IsNullOrWhiteSpace(producto.Nombre))
+            {
+                throw new ArgumentException("El nombre del producto es obligatorio.");
+            }
+
+            if (string.IsNullOrWhiteSpace(producto.Marca))
+            {
+                throw new ArgumentException("La marca del producto es obligatoria.");
+            }
+
+            if (producto.PrecioVenta <= 0)
+            {
+                throw new ArgumentException("El precio de venta debe ser mayor a cero.");
+            }
+
+            if (producto.Stock < 0)
+            {
+                throw new ArgumentException("El stock no puede ser negativo.");
+            }
+
+            return _datos.RegistrarProducto(producto);
+        }
+
+        public List<Producto> ObtenerProductos()
+        {
+            return _datos.ObtenerProductos();
+        }
+
+
         public List<Atencion> ObtenerAtenciones()
         {
             return _datos.ObtenerAtenciones();

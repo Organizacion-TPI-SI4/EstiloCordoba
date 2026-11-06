@@ -17,5 +17,10 @@ namespace EstiloCordobaEntidades
 
         public decimal PrecioVenta { get; set; }
 
+        public int Stock { get; set; }
+
+
+
+
     }
 }

@@ -18,6 +18,9 @@ namespace EstiloCordobaPresentacion
         {
             InitializeComponent();
             _usuario = session;
+
+            administracionToolStripMenuItem3.Click +=
+            administracionToolStripMenuItem3_Click;
         }
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
@@ -154,5 +157,24 @@ namespace EstiloCordobaPresentacion
             formHijo.MdiParent = this;
             formHijo.Show();
         }
+        private void administracionToolStripMenuItem3_Click(object? sender,EventArgs e)
+        {
+            foreach (Form formulario in MdiChildren)
+            {
+                if (formulario is AdministracionProductos)
+                {
+                    formulario.BringToFront();
+                    formulario.Activate();
+                    return;
+                }
+            }
+
+            AdministracionProductos formularioProductos =
+                new AdministracionProductos(_usuario);
+
+            formularioProductos.MdiParent = this;
+            formularioProductos.Show();
+        }
     }
+
 }
