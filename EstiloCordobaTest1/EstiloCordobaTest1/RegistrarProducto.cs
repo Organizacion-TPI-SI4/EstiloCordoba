@@ -1,5 +1,6 @@
 ﻿using EstiloCordobaEntidades;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace EstiloCordobaPresentacion
 {
@@ -10,6 +11,12 @@ namespace EstiloCordobaPresentacion
             BaseAddress = new Uri("http://localhost:5078/")
         };
 
+        private readonly Producto? _productoModificar;
+
+        private bool EsModificacion =>
+            _productoModificar != null;
+
+        // Constructor utilizado para registrar.
         public RegistrarProducto()
         {
             InitializeComponent();
@@ -18,7 +25,23 @@ namespace EstiloCordobaPresentacion
             btnCancelar.Click += btnCancelar_Click;
         }
 
-        private async void btnRegistrar_Click(object? sender, EventArgs e)
+        // Constructor utilizado para modificar.
+        public RegistrarProducto(Producto producto) : this()
+        {
+            _productoModificar = producto;
+
+            Text = "Modificar producto";
+            btnRegistrar.Text = "Guardar cambios";
+            lblTitulo.Text = "Modificar producto";
+            txtNombre.Text = producto.Nombre;
+            txtMarca.Text = producto.Marca;
+            nudPrecioVenta.Value = producto.PrecioVenta;
+            nudStock.Value = producto.Stock;
+        }
+
+        private async void btnRegistrar_Click(
+            object? sender,
+            EventArgs e)
         {
             string nombre = txtNombre.Text.Trim();
             string marca = txtMarca.Text.Trim();
@@ -61,6 +84,7 @@ namespace EstiloCordobaPresentacion
 
             Producto producto = new()
             {
+                Id = _productoModificar?.Id ?? 0,
                 Nombre = nombre,
                 Marca = marca,
                 PrecioVenta = nudPrecioVenta.Value,
@@ -71,33 +95,56 @@ namespace EstiloCordobaPresentacion
             {
                 btnRegistrar.Enabled = false;
 
-                HttpResponseMessage respuesta =
-                    await _httpClient.PostAsJsonAsync(
-                        "api/productos",
-                        producto);
+                HttpResponseMessage respuesta;
 
-                if (respuesta.IsSuccessStatusCode)
+                if (EsModificacion)
                 {
-                    MessageBox.Show(
-                        "Producto registrado correctamente.",
-                        "Registro exitoso",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-
-                    txtNombre.Clear();
-                    txtMarca.Clear();
-                    nudPrecioVenta.Value = 0;
-                    nudStock.Value = 0;
-                    txtNombre.Focus();
+                    respuesta = await _httpClient.PutAsJsonAsync(
+                        $"api/productos/{producto.Id}",
+                        producto);
                 }
                 else
                 {
-                    string error =
-                        await respuesta.Content.ReadAsStringAsync();
+                    respuesta = await _httpClient.PostAsJsonAsync(
+                        "api/productos",
+                        producto);
+                }
+
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    string mensaje = EsModificacion
+                        ? "Producto modificado correctamente."
+                        : "Producto registrado correctamente.";
+
+                    string titulo = EsModificacion
+                        ? "Modificación exitosa"
+                        : "Registro exitoso";
 
                     MessageBox.Show(
-                        "No se pudo registrar el producto: " + error,
-                        "Error",
+                        mensaje,
+                        titulo,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    if (EsModificacion)
+                    {
+                        Close();
+                        return;
+                    }
+
+                    LimpiarCampos();
+                }
+                else
+                {
+                    string contenido =
+                        await respuesta.Content.ReadAsStringAsync();
+
+                    string error =
+                        ObtenerMensajeError(contenido);
+
+                    MessageBox.Show(
+                        error,
+                        "No se pudo guardar el producto",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
                 }
@@ -112,13 +159,65 @@ namespace EstiloCordobaPresentacion
             }
             finally
             {
-                btnRegistrar.Enabled = true;
+                if (!IsDisposed)
+                {
+                    btnRegistrar.Enabled = true;
+                }
             }
         }
 
-        private void btnCancelar_Click(object? sender, EventArgs e)
+        private void LimpiarCampos()
+        {
+            txtNombre.Clear();
+            txtMarca.Clear();
+            nudPrecioVenta.Value = 0;
+            nudStock.Value = 0;
+            txtNombre.Focus();
+        }
+
+        private static string ObtenerMensajeError(
+            string contenido)
+        {
+            try
+            {
+                using JsonDocument documento =
+                    JsonDocument.Parse(contenido);
+
+                JsonElement raiz = documento.RootElement;
+
+                if (raiz.ValueKind == JsonValueKind.String)
+                {
+                    return raiz.GetString() ??
+                        "No se pudo guardar el producto.";
+                }
+
+                if (raiz.ValueKind == JsonValueKind.Object &&
+                    raiz.TryGetProperty(
+                        "mensaje",
+                        out JsonElement mensaje))
+                {
+                    return mensaje.GetString() ??
+                        "No se pudo guardar el producto.";
+                }
+            }
+            catch (JsonException)
+            {
+                // La respuesta no estaba en formato JSON.
+            }
+
+            return contenido;
+        }
+
+        private void btnCancelar_Click(
+            object? sender,
+            EventArgs e)
         {
             Close();
+        }
+
+        private void lblTitulo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

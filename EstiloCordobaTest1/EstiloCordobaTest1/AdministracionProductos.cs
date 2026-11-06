@@ -21,19 +21,19 @@ namespace EstiloCordobaPresentacion
             Load += AdministracionProductos_Load;
             btnConsultar.Click += btnConsultar_Click;
             btnRegistrar.Click += btnRegistrar_Click;
+            btnModificar.Click += btnModificar_Click;
+
+            dgvProductos.SelectionChanged +=
+                dgvProductos_SelectionChanged;
         }
 
         private async void AdministracionProductos_Load(
             object? sender,
             EventArgs e)
         {
-            // Solamente el administrador puede registrar productos.
-            if (_usuario.IdRol != 1)
-            {
-                btnRegistrar.Enabled = false;
-            }
+            bool esAdministrador = _usuario.IdRol == 1;
 
-            // Esta funcionalidad se implementará en PE-16.
+            btnRegistrar.Enabled = esAdministrador;
             btnModificar.Enabled = false;
 
             await CargarProductosAsync();
@@ -52,6 +52,11 @@ namespace EstiloCordobaPresentacion
                 dgvProductos.DataSource = null;
                 dgvProductos.DataSource =
                     productos ?? new List<Producto>();
+
+                dgvProductos.ClearSelection();
+                dgvProductos.CurrentCell = null;
+
+                ActualizarEstadoBotonModificar();
             }
             catch (HttpRequestException)
             {
@@ -66,6 +71,24 @@ namespace EstiloCordobaPresentacion
             {
                 btnConsultar.Enabled = true;
             }
+        }
+
+        private void dgvProductos_SelectionChanged(
+            object? sender,
+            EventArgs e)
+        {
+            ActualizarEstadoBotonModificar();
+        }
+
+        private void ActualizarEstadoBotonModificar()
+        {
+            bool hayProductoSeleccionado =
+                dgvProductos.SelectedCells.Count > 0 &&
+                dgvProductos.CurrentRow?.DataBoundItem is Producto;
+
+            btnModificar.Enabled =
+                _usuario.IdRol == 1 &&
+                hayProductoSeleccionado;
         }
 
         private async void btnConsultar_Click(
@@ -109,6 +132,59 @@ namespace EstiloCordobaPresentacion
                     new RegistrarProducto();
 
                 formularioRegistro.ShowDialog(this);
+                await CargarProductosAsync();
+            }
+        }
+
+        private async void btnModificar_Click(
+            object? sender,
+            EventArgs e)
+        {
+            if (_usuario.IdRol != 1)
+            {
+                MessageBox.Show(
+                    "Solamente un administrador puede " +
+                    "modificar productos.",
+                    "Acceso restringido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (dgvProductos.SelectedCells.Count == 0 ||
+                dgvProductos.CurrentRow?.DataBoundItem
+                    is not Producto productoSeleccionado)
+            {
+                MessageBox.Show(
+                    "Seleccioná un producto para modificar.",
+                    "Producto no seleccionado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (MdiParent != null)
+            {
+                RegistrarProducto formularioModificacion =
+                    new RegistrarProducto(productoSeleccionado);
+
+                formularioModificacion.MdiParent = MdiParent;
+
+                formularioModificacion.FormClosed += async (_, _) =>
+                {
+                    await CargarProductosAsync();
+                };
+
+                formularioModificacion.Show();
+            }
+            else
+            {
+                using RegistrarProducto formularioModificacion =
+                    new RegistrarProducto(productoSeleccionado);
+
+                formularioModificacion.ShowDialog(this);
                 await CargarProductosAsync();
             }
         }
