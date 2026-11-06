@@ -108,6 +108,27 @@ namespace EstiloCordobaPresentacion
                 return;
             }
 
+            if(DateOnly.FromDateTime(dtpFecha.Value.Date) < DateOnly.FromDateTime(DateTime.Now))
+            {
+                MessageBox.Show("La fecha del turno no puede ser anterior a la fecha actual.");
+                return;
+            }
+
+            TimeOnly.TryParse(txtHora.Text, out TimeOnly hora);
+
+            if (hora < TimeOnly.FromDateTime(DateTime.Now))
+            {
+                MessageBox.Show("La hora del turno no puede ser anterior a la hora actual.");
+                return;
+            }
+
+            if (!TimeOnly.TryParse(txtHora.Text, out TimeOnly horaSeleccionada))
+            {
+                MessageBox.Show("Ingresá una hora válida (HH:mm).");
+                return;
+            }
+
+
             List<DetTurno> detalles = new List<DetTurno>();
 
             foreach (Servicio servicio in serviciosSeleccionados)
@@ -126,18 +147,11 @@ namespace EstiloCordobaPresentacion
                 idUsuario = _usuario.IdEmpleado,
                 idCliente = ((Cliente)cmbCliente.SelectedItem).Id,
                 Fecha = DateOnly.FromDateTime(dtpFecha.Value.Date),
-                DetallesTurno = detalles
+                DetallesTurno = detalles,
+                Hora = horaSeleccionada
             };
 
-            if (TimeOnly.TryParse(txtHora.Text, out TimeOnly hora))
-            {
-                nuevoTurno.Hora = hora;
-            }
-            else
-            {
-                MessageBox.Show("Ingresá una hora válida (HH:mm).");
-                return;
-            }
+            
 
 
             HttpResponseMessage respuesta = await _httpClient.PostAsJsonAsync("api/turnos", nuevoTurno);
