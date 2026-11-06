@@ -55,6 +55,9 @@
             btnAceptar = new Button();
             btnRegistrar = new Button();
             btnCancelar = new Button();
+            label9 = new Label();
+            cmbBarbero = new ComboBox();
+            label10 = new Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvServiciosTurno).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsServiciosTurno).BeginInit();
@@ -276,7 +279,7 @@
             btnRegistrar.BackColor = Color.FromArgb(128, 255, 128);
             btnRegistrar.Cursor = Cursors.Hand;
             btnRegistrar.FlatStyle = FlatStyle.Popup;
-            btnRegistrar.Location = new Point(227, 476);
+            btnRegistrar.Location = new Point(230, 568);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.Size = new Size(469, 81);
             btnRegistrar.TabIndex = 4;
@@ -289,18 +292,51 @@
             btnCancelar.BackColor = Color.FromArgb(255, 128, 128);
             btnCancelar.Cursor = Cursors.Hand;
             btnCancelar.FlatStyle = FlatStyle.Popup;
-            btnCancelar.Location = new Point(16, 476);
+            btnCancelar.Location = new Point(12, 568);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(184, 81);
             btnCancelar.TabIndex = 5;
             btnCancelar.Text = "CANCELAR";
             btnCancelar.UseVisualStyleBackColor = false;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(22, 473);
+            label9.Name = "label9";
+            label9.Size = new Size(119, 20);
+            label9.TabIndex = 6;
+            label9.Text = "Asignar barbero:";
+            // 
+            // cmbBarbero
+            // 
+            cmbBarbero.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbBarbero.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbBarbero.FormattingEnabled = true;
+            cmbBarbero.Location = new Point(147, 470);
+            cmbBarbero.Name = "cmbBarbero";
+            cmbBarbero.Size = new Size(468, 28);
+            cmbBarbero.TabIndex = 7;
+            cmbBarbero.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(22, 536);
+            label10.Name = "label10";
+            label10.Size = new Size(277, 15);
+            label10.TabIndex = 8;
+            label10.Text = "* Los productos se agregan en la ventana Modificar";
+            // 
             // RegistrarAtencion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(709, 569);
+            ClientSize = new Size(711, 661);
+            Controls.Add(label10);
+            Controls.Add(cmbBarbero);
+            Controls.Add(label9);
             Controls.Add(btnCancelar);
             Controls.Add(btnRegistrar);
             Controls.Add(btnAceptar);
@@ -347,5 +383,8 @@
         private Label label8;
         private Button btnRegistrar;
         private Button btnCancelar;
+        private Label label9;
+        private ComboBox cmbBarbero;
+        private Label label10;
     }
 }

@@ -135,6 +135,11 @@ namespace EstiloCordobaNegocio
             return _datos.ObtenerEmpleados();
         }
 
+        public List<Empleado> ObtenerEmpleadosBarberos()
+        {
+            return _datos.ObtenerEmpleadosBarberos();
+        }
+
         public Empleado? ValidarLogin(string email, string clave)
         {
             var empleado = _datos.ObtenerEmpleadoPorEmail(email.Trim());

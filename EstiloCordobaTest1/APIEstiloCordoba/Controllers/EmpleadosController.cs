@@ -23,8 +23,16 @@ namespace APIEstiloCordoba.Controllers
                 return Ok(empleados);
             }
 
+            [HttpGet("barberos")]
+            public ActionResult<List<Empleado>> ObtenerEmpleadosBarberos()
+            {
+                var empleados = _negocio.ObtenerEmpleadosBarberos();
 
-            [HttpPost]
+                return Ok(empleados);
+            }
+
+
+        [HttpPost]
             public IActionResult Registrar([FromBody] Empleado empleado)
             {
                 try

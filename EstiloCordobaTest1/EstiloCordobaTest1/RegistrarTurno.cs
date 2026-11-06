@@ -102,6 +102,12 @@ namespace EstiloCordobaPresentacion
 
         private async void btnRegistrar_Click(object sender, EventArgs e)
         {
+            if(serviciosSeleccionados.Count == 0)
+            {
+                MessageBox.Show("Seleccioná al menos un servicio.");
+                return;
+            }
+
             List<DetTurno> detalles = new List<DetTurno>();
 
             foreach (Servicio servicio in serviciosSeleccionados)
@@ -132,6 +138,7 @@ namespace EstiloCordobaPresentacion
                 MessageBox.Show("Ingresá una hora válida (HH:mm).");
                 return;
             }
+
 
             HttpResponseMessage respuesta = await _httpClient.PostAsJsonAsync("api/turnos", nuevoTurno);
 

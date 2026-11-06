@@ -196,6 +196,11 @@ namespace EstiloCordobaDatos
             return _contexto.Empleados.AsNoTracking().ToList();
         }
 
+        public List<Empleado> ObtenerEmpleadosBarberos()
+        {
+            return _contexto.Empleados.AsNoTracking().Where(e => e.IdRol == 3).ToList();
+        }
+
 
         //Devuelve un empleado que cumpla con el criterio.
         public Empleado? ObtenerEmpleadoPorEmail(string email)

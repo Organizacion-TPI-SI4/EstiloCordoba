@@ -13,6 +13,9 @@
     <Compile Update="AdministracionPersonal.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="AdministracionProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="AdministracionServicios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -35,6 +38,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="RegistrarPersonal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RegistrarProducto.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="RegistrarServicio.cs">

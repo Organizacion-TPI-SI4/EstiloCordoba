@@ -28,6 +28,7 @@ namespace EstiloCordobaPresentacion
         {
             InitializeComponent();
             CargarTurnos();
+            CargarBarberos();
         }
 
 
@@ -40,6 +41,23 @@ namespace EstiloCordobaPresentacion
 
             cmbTurno.DisplayMember = "Descripcion";
             cmbTurno.ValueMember = "Id";
+        }
+
+        private async void CargarBarberos()
+        {
+            var barberos = await _httpClient.GetFromJsonAsync<List<Empleado>>("api/empleados/barberos");
+
+            if (barberos != null)
+            {
+                cmbBarbero.DataSource = barberos.Select(b => new { b.Id, Descripcion = $"Barbero: {b.Nombre} - Id Barbero: {b.Id}" }).ToList();
+                cmbBarbero.DisplayMember = "Descripcion";
+                cmbBarbero.ValueMember = "Id";
+            }
+            else
+            {
+                MessageBox.Show("No hay barberos disponibles.");
+                btnRegistrar.Enabled = false;
+            }
         }
 
 
@@ -97,6 +115,7 @@ namespace EstiloCordobaPresentacion
                     nuevaAtencion.hora = TimeOnly.FromDateTime(DateTime.Now);
                     nuevaAtencion.hora = nuevaAtencion.hora.Add(TimeSpan.FromSeconds(-nuevaAtencion.hora.Second));
                     nuevaAtencion.idEstado = 1;
+                    nuevaAtencion.idBarbero = (int)cmbBarbero.SelectedValue;
                     nuevaAtencion.totalServicios = Convert.ToDecimal(txtTotalServicio.Text);
 
                     turnoSeleccionado = true;
@@ -139,6 +158,11 @@ namespace EstiloCordobaPresentacion
             {
                 MessageBox.Show("Error de conexión: " + ex.Message);
             }
-        } 
-    }   
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
