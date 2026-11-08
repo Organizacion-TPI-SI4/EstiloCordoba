@@ -18,6 +18,7 @@ namespace EstiloCordobaPresentacion
         {
             InitializeComponent();
             _usuario = session;
+            this.WindowState = FormWindowState.Maximized;
 
             administracionToolStripMenuItem3.Click +=
             administracionToolStripMenuItem3_Click;
@@ -29,6 +30,7 @@ namespace EstiloCordobaPresentacion
             {
                 // Recepcionista no puede acceder a la administración de personal
                 personalToolStripMenuItem.Visible = false;
+                barberosToolStripMenuItem.Visible = false;
             }
 
             if (_usuario.IdRol == 3)
@@ -38,12 +40,13 @@ namespace EstiloCordobaPresentacion
                 turnosToolStripMenuItem.Visible = false;
                 serviciosToolStripMenuItem.Visible = false;
                 clientesToolStripMenuItem.Visible = false;
+                atencionesToolStripMenuItem.Visible = false;
+                productosToolStripMenuItem.Visible = false;
             }
 
             if (_usuario.IdRol == 4)
             {
-                // Compras no puede acceder a la administración de personal
-                personalToolStripMenuItem.Visible = false;
+                // Restricciones del encargado de compras.
             }
         }
 
@@ -157,7 +160,7 @@ namespace EstiloCordobaPresentacion
             formHijo.MdiParent = this;
             formHijo.Show();
         }
-        private void administracionToolStripMenuItem3_Click(object? sender,EventArgs e)
+        private void administracionToolStripMenuItem3_Click(object? sender, EventArgs e)
         {
             foreach (Form formulario in MdiChildren)
             {
@@ -174,6 +177,24 @@ namespace EstiloCordobaPresentacion
 
             formularioProductos.MdiParent = this;
             formularioProductos.Show();
+        }
+
+        private void barberosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form formulario in MdiChildren)
+            {
+                if (formulario is AtencionBarbero)
+                {
+                    formulario.BringToFront();
+                    formulario.Activate();
+                    return;
+                }
+            }
+
+            AtencionBarbero formularioBarbero = new AtencionBarbero(_usuario);
+
+            formularioBarbero.MdiParent = this;
+            formularioBarbero.Show();
         }
     }
 

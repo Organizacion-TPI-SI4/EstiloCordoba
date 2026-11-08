@@ -27,5 +27,7 @@ namespace EstiloCordobaEntidades
 
         public string UsuarioNombre => usuario?.Nombre ?? "";
         public string ClienteNombre => cliente?.Nombre ?? "";
+
+        public int asignado { get; set; }
     }
 }

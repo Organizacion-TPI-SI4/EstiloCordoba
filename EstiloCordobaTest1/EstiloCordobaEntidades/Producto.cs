@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace EstiloCordobaEntidades
@@ -19,8 +20,10 @@ namespace EstiloCordobaEntidades
 
         public int Stock { get; set; }
 
+        [NotMapped]
+        public int Cantidad { get; set; }
 
-
-
+        [NotMapped]
+        public decimal Subtotal { get; set; }
     }
 }

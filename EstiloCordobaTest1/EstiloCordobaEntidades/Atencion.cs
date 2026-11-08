@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -33,7 +34,20 @@ namespace EstiloCordobaEntidades
         public int? idMedioPago { get; set; }
 
 
+        [ForeignKey("idCliente")]
+        public Cliente? Cliente { get; set; } = null!;
 
-        //public List<DetAtencion> DetallesAtencion { get; set; } = new List<DetAtencion>();
+        [ForeignKey("idTurno")]
+        public Turno? Turno { get; set; } = null!;
+
+
+        [ForeignKey("idEstado")]
+        public Estado? Estado { get; set; } = null!;
+
+        [ForeignKey("idBarbero")]
+        public Empleado? Empleado { get; set; } = null!;
+
+
+        public List<DetAtencion> DetallesAtencion { get; set; } = new List<DetAtencion>();
     }
 }

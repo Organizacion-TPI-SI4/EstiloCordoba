@@ -65,6 +65,14 @@ namespace EstiloCordobaEF.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("idBarbero");
+
+                    b.HasIndex("idCliente");
+
+                    b.HasIndex("idEstado");
+
+                    b.HasIndex("idTurno");
+
                     b.ToTable("Atenciones");
                 });
 
@@ -173,6 +181,38 @@ namespace EstiloCordobaEF.Migrations
                         });
                 });
 
+            modelBuilder.Entity("EstiloCordobaEntidades.DetAtencion", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<int?>("Atencionid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idAtencion")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("productoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Atencionid");
+
+                    b.HasIndex("productoId");
+
+                    b.ToTable("DetallesAtencion");
+                });
+
             modelBuilder.Entity("EstiloCordobaEntidades.DetTurno", b =>
                 {
                     b.Property<int>("id")
@@ -253,6 +293,50 @@ namespace EstiloCordobaEF.Migrations
                             IdRol = 2,
                             Nombre = "Empleado de prueba",
                             Telefono = "3510000002"
+                        });
+                });
+
+            modelBuilder.Entity("EstiloCordobaEntidades.Estado", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("nombreEstado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Estados");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            nombreEstado = "Registrada"
+                        },
+                        new
+                        {
+                            id = 2,
+                            nombreEstado = "Iniciada"
+                        },
+                        new
+                        {
+                            id = 3,
+                            nombreEstado = "Finalizada"
+                        },
+                        new
+                        {
+                            id = 4,
+                            nombreEstado = "Pendiente de pago"
+                        },
+                        new
+                        {
+                            id = 5,
+                            nombreEstado = "Cobrada"
                         });
                 });
 
@@ -393,6 +477,9 @@ namespace EstiloCordobaEF.Migrations
                     b.Property<TimeOnly>("Hora")
                         .HasColumnType("time");
 
+                    b.Property<int>("asignado")
+                        .HasColumnType("int");
+
                     b.Property<int>("idCliente")
                         .HasColumnType("int");
 
@@ -408,11 +495,58 @@ namespace EstiloCordobaEF.Migrations
                     b.ToTable("Turnos");
                 });
 
+            modelBuilder.Entity("EstiloCordobaEntidades.Atencion", b =>
+                {
+                    b.HasOne("EstiloCordobaEntidades.Empleado", "Empleado")
+                        .WithMany()
+                        .HasForeignKey("idBarbero")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("EstiloCordobaEntidades.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("idCliente")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("EstiloCordobaEntidades.Estado", "Estado")
+                        .WithMany()
+                        .HasForeignKey("idEstado")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("EstiloCordobaEntidades.Turno", "Turno")
+                        .WithMany()
+                        .HasForeignKey("idTurno")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Empleado");
+
+                    b.Navigation("Estado");
+
+                    b.Navigation("Turno");
+                });
+
             modelBuilder.Entity("EstiloCordobaEntidades.Cliente", b =>
                 {
                     b.HasOne("EstiloCordobaEntidades.Beneficio", null)
                         .WithMany()
                         .HasForeignKey("IdBeneficio");
+                });
+
+            modelBuilder.Entity("EstiloCordobaEntidades.DetAtencion", b =>
+                {
+                    b.HasOne("EstiloCordobaEntidades.Atencion", null)
+                        .WithMany("DetallesAtencion")
+                        .HasForeignKey("Atencionid");
+
+                    b.HasOne("EstiloCordobaEntidades.Producto", "producto")
+                        .WithMany()
+                        .HasForeignKey("productoId");
+
+                    b.Navigation("producto");
                 });
 
             modelBuilder.Entity("EstiloCordobaEntidades.DetTurno", b =>
@@ -469,6 +603,11 @@ namespace EstiloCordobaEF.Migrations
                     b.Navigation("cliente");
 
                     b.Navigation("usuario");
+                });
+
+            modelBuilder.Entity("EstiloCordobaEntidades.Atencion", b =>
+                {
+                    b.Navigation("DetallesAtencion");
                 });
 
             modelBuilder.Entity("EstiloCordobaEntidades.Turno", b =>

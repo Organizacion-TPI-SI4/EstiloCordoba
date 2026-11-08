@@ -35,7 +35,7 @@ namespace EstiloCordobaPresentacion
         private async void CargarTurnos()
         {
 
-            var turnos = await _httpClient.GetFromJsonAsync<List<Turno>>("api/turnos");
+            var turnos = await _httpClient.GetFromJsonAsync<List<Turno>>("api/turnos/noasignados");
 
             cmbTurno.DataSource = turnos.Select(t => new { t.id, Descripcion = $"Cliente: {t.ClienteNombre} - Id Turno: {t.id}" }).ToList();
 

@@ -22,6 +22,13 @@ namespace APIEstiloCordoba.Controllers
             return Ok(turnos);
         }
 
+        [HttpGet("noasignados")]
+        public IActionResult ObtenerTurnosNoAsignados()
+        {
+            List<Turno> turnos = _negocio.ObtenerNoAsignadosTurnos();
+            return Ok(turnos);
+        }
+
         [HttpGet("{id}")]
         public IActionResult ObtenerTurnosPorId(int id)
         {

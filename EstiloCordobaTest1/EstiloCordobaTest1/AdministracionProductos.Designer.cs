@@ -18,148 +18,138 @@
 
         private void InitializeComponent()
         {
-            DataGridViewCellStyle estiloPrecio =
-                new DataGridViewCellStyle();
-
+            components = new System.ComponentModel.Container();
             lblTitulo = new Label();
             dgvProductos = new DataGridView();
-            colId = new DataGridViewTextBoxColumn();
-            colNombre = new DataGridViewTextBoxColumn();
-            colMarca = new DataGridViewTextBoxColumn();
-            colPrecioVenta = new DataGridViewTextBoxColumn();
-            colStock = new DataGridViewTextBoxColumn();
             btnConsultar = new Button();
             btnRegistrar = new Button();
             btnModificar = new Button();
-
-            ((System.ComponentModel.ISupportInitialize)dgvProductos)
-                .BeginInit();
-
+            bsProductos = new BindingSource(components);
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            nombreDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            marcaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            precioVentaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            stockDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsProductos).BeginInit();
             SuspendLayout();
-
+            // 
             // lblTitulo
+            // 
             lblTitulo.AutoSize = true;
-            lblTitulo.Font = new Font(
-                "Segoe UI",
-                16F,
-                FontStyle.Bold);
-
-            lblTitulo.Location = new Point(30, 22);
+            lblTitulo.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            lblTitulo.Location = new Point(26, 16);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(294, 37);
+            lblTitulo.Size = new Size(248, 30);
+            lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Administrar productos";
-
+            // 
             // dgvProductos
+            // 
             dgvProductos.AllowUserToAddRows = false;
             dgvProductos.AllowUserToDeleteRows = false;
             dgvProductos.AutoGenerateColumns = false;
-            dgvProductos.ColumnHeadersHeightSizeMode =
-                DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-
-            dgvProductos.Columns.AddRange(
-                colId,
-                colNombre,
-                colMarca,
-                colPrecioVenta,
-                colStock);
-
-            dgvProductos.Location = new Point(30, 80);
+            dgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProductos.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nombreDataGridViewTextBoxColumn, marcaDataGridViewTextBoxColumn, precioVentaDataGridViewTextBoxColumn, stockDataGridViewTextBoxColumn });
+            dgvProductos.DataSource = bsProductos;
+            dgvProductos.Location = new Point(26, 60);
+            dgvProductos.Margin = new Padding(3, 2, 3, 2);
             dgvProductos.MultiSelect = false;
             dgvProductos.Name = "dgvProductos";
             dgvProductos.ReadOnly = true;
             dgvProductos.RowHeadersVisible = false;
             dgvProductos.RowHeadersWidth = 51;
-            dgvProductos.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-
-            dgvProductos.Size = new Size(800, 335);
-
-            // colId
-            colId.DataPropertyName = "Id";
-            colId.HeaderText = "ID";
-            colId.MinimumWidth = 6;
-            colId.Name = "colId";
-            colId.ReadOnly = true;
-            colId.Width = 60;
-
-            // colNombre
-            colNombre.AutoSizeMode =
-                DataGridViewAutoSizeColumnMode.Fill;
-
-            colNombre.DataPropertyName = "Nombre";
-            colNombre.HeaderText = "Nombre";
-            colNombre.MinimumWidth = 6;
-            colNombre.Name = "colNombre";
-            colNombre.ReadOnly = true;
-
-            // colMarca
-            colMarca.DataPropertyName = "Marca";
-            colMarca.HeaderText = "Marca";
-            colMarca.MinimumWidth = 6;
-            colMarca.Name = "colMarca";
-            colMarca.ReadOnly = true;
-            colMarca.Width = 180;
-
-            // colPrecioVenta
-            colPrecioVenta.DataPropertyName = "PrecioVenta";
-            estiloPrecio.Format = "C2";
-            estiloPrecio.FormatProvider =
-    new System.Globalization.CultureInfo("es-AR");
-            estiloPrecio.NullValue = null;
-            colPrecioVenta.DefaultCellStyle = estiloPrecio;
-            colPrecioVenta.HeaderText = "Precio de venta";
-            colPrecioVenta.MinimumWidth = 6;
-            colPrecioVenta.Name = "colPrecioVenta";
-            colPrecioVenta.ReadOnly = true;
-            colPrecioVenta.Width = 160;
-
-            // colStock
-            colStock.DataPropertyName = "Stock";
-            colStock.HeaderText = "Stock";
-            colStock.MinimumWidth = 6;
-            colStock.Name = "colStock";
-            colStock.ReadOnly = true;
-            colStock.Width = 100;
-
+            dgvProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvProductos.Size = new Size(700, 251);
+            dgvProductos.TabIndex = 1;
+            // 
             // btnConsultar
-            btnConsultar.Location = new Point(30, 440);
+            // 
+            btnConsultar.Location = new Point(26, 330);
+            btnConsultar.Margin = new Padding(3, 2, 3, 2);
             btnConsultar.Name = "btnConsultar";
-            btnConsultar.Size = new Size(130, 42);
+            btnConsultar.Size = new Size(114, 32);
+            btnConsultar.TabIndex = 2;
             btnConsultar.Text = "Actualizar";
             btnConsultar.UseVisualStyleBackColor = true;
-
+            // 
             // btnRegistrar
-            btnRegistrar.Location = new Point(550, 440);
+            // 
+            btnRegistrar.Location = new Point(481, 330);
+            btnRegistrar.Margin = new Padding(3, 2, 3, 2);
             btnRegistrar.Name = "btnRegistrar";
-            btnRegistrar.Size = new Size(130, 42);
+            btnRegistrar.Size = new Size(114, 32);
+            btnRegistrar.TabIndex = 3;
             btnRegistrar.Text = "Registrar";
             btnRegistrar.UseVisualStyleBackColor = true;
-
+            // 
             // btnModificar
+            // 
             btnModificar.Enabled = false;
-            btnModificar.Location = new Point(700, 440);
+            btnModificar.Location = new Point(612, 330);
+            btnModificar.Margin = new Padding(3, 2, 3, 2);
             btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(130, 42);
+            btnModificar.Size = new Size(114, 32);
+            btnModificar.TabIndex = 4;
             btnModificar.Text = "Modificar";
             btnModificar.UseVisualStyleBackColor = true;
-
+            // 
+            // bsProductos
+            // 
+            bsProductos.DataSource = typeof(EstiloCordobaEntidades.Producto);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // nombreDataGridViewTextBoxColumn
+            // 
+            nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
+            nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            nombreDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // marcaDataGridViewTextBoxColumn
+            // 
+            marcaDataGridViewTextBoxColumn.DataPropertyName = "Marca";
+            marcaDataGridViewTextBoxColumn.HeaderText = "Marca";
+            marcaDataGridViewTextBoxColumn.Name = "marcaDataGridViewTextBoxColumn";
+            marcaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // precioVentaDataGridViewTextBoxColumn
+            // 
+            precioVentaDataGridViewTextBoxColumn.DataPropertyName = "PrecioVenta";
+            precioVentaDataGridViewTextBoxColumn.HeaderText = "PrecioVenta";
+            precioVentaDataGridViewTextBoxColumn.Name = "precioVentaDataGridViewTextBoxColumn";
+            precioVentaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // stockDataGridViewTextBoxColumn
+            // 
+            stockDataGridViewTextBoxColumn.DataPropertyName = "Stock";
+            stockDataGridViewTextBoxColumn.HeaderText = "Stock";
+            stockDataGridViewTextBoxColumn.Name = "stockDataGridViewTextBoxColumn";
+            stockDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // AdministracionProductos
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(860, 510);
+            ClientSize = new Size(754, 388);
             Controls.Add(lblTitulo);
             Controls.Add(dgvProductos);
             Controls.Add(btnConsultar);
             Controls.Add(btnRegistrar);
             Controls.Add(btnModificar);
-            MinimumSize = new Size(878, 557);
+            Margin = new Padding(3, 2, 3, 2);
+            MinimumSize = new Size(770, 427);
             Name = "AdministracionProductos";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Administración de productos";
-
-            ((System.ComponentModel.ISupportInitialize)dgvProductos)
-                .EndInit();
-
+            ((System.ComponentModel.ISupportInitialize)dgvProductos).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsProductos).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -176,5 +166,11 @@
         private Button btnConsultar;
         private Button btnRegistrar;
         private Button btnModificar;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn marcaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn precioVentaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn stockDataGridViewTextBoxColumn;
+        private BindingSource bsProductos;
     }
 }

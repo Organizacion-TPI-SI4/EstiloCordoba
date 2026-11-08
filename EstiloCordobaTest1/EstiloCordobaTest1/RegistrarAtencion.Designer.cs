@@ -325,9 +325,9 @@
             label10.AutoSize = true;
             label10.Location = new Point(22, 536);
             label10.Name = "label10";
-            label10.Size = new Size(277, 15);
+            label10.Size = new Size(372, 15);
             label10.TabIndex = 8;
-            label10.Text = "* Los productos se agregan en la ventana Modificar";
+            label10.Text = "* Los productos adicionales se agregan una vez finalizada la atencion.";
             // 
             // RegistrarAtencion
             // 

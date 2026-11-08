@@ -24,7 +24,11 @@ namespace EstiloCordobaEF
         public DbSet<Turno> Turnos => Set<Turno>();
         public DbSet<DetTurno> DetallesTurno => Set<DetTurno>();
 
+        public DbSet<DetAtencion> DetallesAtencion => Set<DetAtencion>();
+
         public DbSet<Atencion> Atenciones => Set<Atencion>();
+
+        public DbSet<Estado> Estados => Set<Estado>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -84,6 +88,30 @@ namespace EstiloCordobaEF
             modelBuilder.Entity<Atencion>()
                 .Property(a => a.totalProductos)
                 .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Atencion>()
+               .HasOne(a => a.Cliente)
+               .WithMany()
+               .HasForeignKey(a => a.idCliente)
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Atencion>()
+                .HasOne(a => a.Turno)
+                .WithMany()
+                .HasForeignKey(a => a.idTurno)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Atencion>()
+               .HasOne(a => a.Estado)
+               .WithMany()
+               .HasForeignKey(a => a.idEstado)
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Atencion>()
+               .HasOne(a => a.Empleado)
+               .WithMany()
+               .HasForeignKey(a => a.idBarbero)
+               .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Rol>().HasData(
             new Rol
@@ -176,6 +204,34 @@ namespace EstiloCordobaEF
             new Categoria { Id = 1, descripcion = "Corte y Estilizado" },
             new Categoria { Id = 2, descripcion = "Colorimetria" }
         );
+
+            modelBuilder.Entity<Estado>().HasData(
+            new Estado
+            {
+                id = 1,
+                nombreEstado = "Registrada"
+            },
+             new Estado
+             {
+                 id = 2,
+                 nombreEstado = "Iniciada"
+             },
+             new Estado
+             {
+                 id = 3,
+                 nombreEstado = "Finalizada"
+             },
+             new Estado
+             {
+                 id = 4,
+                 nombreEstado = "Pendiente de pago"
+             },
+             new Estado
+             {
+                 id = 5,
+                 nombreEstado = "Cobrada"
+              }
+             );
         }   
     }
 }

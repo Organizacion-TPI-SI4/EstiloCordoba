@@ -64,7 +64,24 @@ namespace EstiloCordobaPresentacion
 
         private void AdministracionAtenciones_Load(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void btnFinalizada_Click(object sender, EventArgs e)
+        {
+            foreach (Form formulario in this.MdiParent.MdiChildren)
+            {
+                if (formulario is AtencionFinalizadas)
+                {
+                    formulario.BringToFront();
+                    formulario.Activate();
+                    return;
+                }
+            }
+
+            AtencionFinalizadas formHijo = new AtencionFinalizadas();
+            formHijo.MdiParent = this.MdiParent;
+            formHijo.Show();
         }
     }
 }

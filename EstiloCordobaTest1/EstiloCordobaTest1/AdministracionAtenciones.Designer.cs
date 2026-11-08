@@ -34,9 +34,10 @@
             btnConsultar = new Button();
             btnRegistrar = new Button();
             btnModificar = new Button();
+            btnFinalizada = new Button();
+            button1 = new Button();
             textBox1 = new TextBox();
             dgvAtencion = new DataGridView();
-            bsAtencion = new BindingSource(components);
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             fechaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             horaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -48,6 +49,7 @@
             idTurnoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             idEstadoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             idMedioPagoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bsAtencion = new BindingSource(components);
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAtencion).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsAtencion).BeginInit();
@@ -59,6 +61,8 @@
             flowLayoutPanel1.Controls.Add(btnConsultar);
             flowLayoutPanel1.Controls.Add(btnRegistrar);
             flowLayoutPanel1.Controls.Add(btnModificar);
+            flowLayoutPanel1.Controls.Add(btnFinalizada);
+            flowLayoutPanel1.Controls.Add(button1);
             flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 0);
@@ -96,6 +100,25 @@
             btnModificar.Text = "Modificar";
             btnModificar.UseVisualStyleBackColor = true;
             // 
+            // btnFinalizada
+            // 
+            btnFinalizada.Location = new Point(13, 190);
+            btnFinalizada.Name = "btnFinalizada";
+            btnFinalizada.Size = new Size(172, 59);
+            btnFinalizada.TabIndex = 3;
+            btnFinalizada.Text = "Finalizadas";
+            btnFinalizada.UseVisualStyleBackColor = true;
+            btnFinalizada.Click += btnFinalizada_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(13, 255);
+            button1.Name = "button1";
+            button1.Size = new Size(172, 64);
+            button1.TabIndex = 4;
+            button1.Text = "Pendiente de pago";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // textBox1
             // 
             textBox1.Location = new Point(218, 13);
@@ -110,14 +133,10 @@
             dgvAtencion.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAtencion.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, fechaDataGridViewTextBoxColumn, horaDataGridViewTextBoxColumn, totalCalculadoDataGridViewTextBoxColumn, totalServiciosDataGridViewTextBoxColumn, totalProductosDataGridViewTextBoxColumn, idBarberoDataGridViewTextBoxColumn, idClienteDataGridViewTextBoxColumn, idTurnoDataGridViewTextBoxColumn, idEstadoDataGridViewTextBoxColumn, idMedioPagoDataGridViewTextBoxColumn });
             dgvAtencion.DataSource = bsAtencion;
-            dgvAtencion.Location = new Point(218, 65);
+            dgvAtencion.Location = new Point(218, 42);
             dgvAtencion.Name = "dgvAtencion";
-            dgvAtencion.Size = new Size(972, 480);
+            dgvAtencion.Size = new Size(972, 503);
             dgvAtencion.TabIndex = 3;
-            // 
-            // bsAtencion
-            // 
-            bsAtencion.DataSource = typeof(EstiloCordobaEntidades.Atencion);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -185,6 +204,10 @@
             idMedioPagoDataGridViewTextBoxColumn.HeaderText = "idMedioPago";
             idMedioPagoDataGridViewTextBoxColumn.Name = "idMedioPagoDataGridViewTextBoxColumn";
             // 
+            // bsAtencion
+            // 
+            bsAtencion.DataSource = typeof(EstiloCordobaEntidades.Atencion);
+            // 
             // AdministracionAtenciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -225,5 +248,7 @@
         private DataGridViewTextBoxColumn idEstadoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn idMedioPagoDataGridViewTextBoxColumn;
         private BindingSource bsAtencion;
+        private Button btnFinalizada;
+        private Button button1;
     }
 }

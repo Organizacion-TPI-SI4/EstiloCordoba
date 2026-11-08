@@ -17,23 +17,32 @@ namespace EstiloCordobaDatos
 
         public bool RegistrarAtencion(Atencion atencion)
         {
-            bool existe = _contexto.Atenciones
-        .Any(a => a.idTurno == atencion.idTurno);
+            bool existe = _contexto.Atenciones.Any(a => a.idTurno == atencion.idTurno);
 
             if (existe)
                 return false;
 
             try
             {
-                _contexto.Atenciones.Add(atencion);
-                _contexto.SaveChanges();
+                var turnoNoAsignado = _contexto.Turnos.Where(t => t.id == atencion.idTurno).FirstOrDefault();
 
-                return true;
+                if(turnoNoAsignado.asignado == 1)
+                {
+                    return false;
+                }
+                else
+                {
+                    turnoNoAsignado.asignado = 1;
+
+                    _contexto.Atenciones.Add(atencion);
+                    _contexto.SaveChanges();
+
+                    return true;
+                }     
             }
             catch (DbUpdateException ex)
             {
-                throw new Exception(
-                    "Error SQL: " + ex.InnerException?.Message, ex);
+                throw new Exception("Error SQL: " + ex.InnerException?.Message, ex);
             }
         }
 
@@ -166,9 +175,21 @@ namespace EstiloCordobaDatos
                 .ToList();
         }
 
+        public Producto ObtenerProductoPorId(int id)
+        {
+            return _contexto.Productos.AsNoTracking().FirstOrDefault(p => p.Id == id);
+        }
+
         public List<Turno> ObtenerTurnos()
         {
             return _contexto.Turnos.Include(t => t.usuario).Include(t => t.cliente).Include(t => t.DetallesTurno).ThenInclude(d => d.servicio)
+            .AsNoTracking()
+            .ToList();
+        }
+
+        public List<Turno> ObtenerTurnosNoAsignados()
+        {
+            return _contexto.Turnos.Include(t => t.usuario).Include(t => t.cliente).Include(t => t.DetallesTurno).ThenInclude(d => d.servicio).Where(t => t.asignado == 0)
             .AsNoTracking()
             .ToList();
         }
@@ -185,9 +206,103 @@ namespace EstiloCordobaDatos
             }   
         }
 
+        public Estado ObtenerEstadoPorId(int id)
+        {
+            if (!_contexto.Estados.Any(e => e.id == id))
+            {
+                return null;
+            }
+            else
+            {
+                return _contexto.Estados.AsNoTracking().FirstOrDefault(e => e.id == id);
+            }
+        }
+
         public List<Atencion> ObtenerAtenciones()
         {
             return _contexto.Atenciones.AsNoTracking().ToList();
+        }
+
+        public Atencion ObtenerAtencionPorId(int id)
+        {
+
+            return _contexto.Atenciones
+            .AsNoTracking()
+            .Include(a => a.Estado)
+            .Include(a => a.Cliente)
+            .Include(a => a.Turno)
+            .Include(a => a.Empleado)
+            .FirstOrDefault(a => a.id == id);
+        }
+
+        public List<Atencion> ObtenerAtencionesPorEstado()
+        {
+            return _contexto.Atenciones
+                .AsNoTracking()
+                .Include(a => a.Estado)
+                .Include(a => a.Cliente)
+                .Include(a => a.Turno)
+                .Where(a => a.idEstado == 3)
+                .ToList();
+        }
+
+        public List<Atencion> ObtenerAtencionesPorBarbero(int idBarbero)
+        {
+            return _contexto.Atenciones
+            .Include(a => a.Cliente)
+            .AsNoTracking()
+            .Where(a => a.idBarbero == idBarbero)
+            .ToList();
+        }
+
+        public bool CambiarEstadoAtencion(int idEstado, int idAtencion)
+        {
+            var atencion = _contexto.Atenciones.FirstOrDefault(a => a.id == idAtencion);
+
+            if (atencion == null)
+            {
+                return false;
+            }
+
+            atencion.idEstado = idEstado;
+
+            _contexto.SaveChanges();
+
+            return true;
+        }
+
+        public bool ActualizarAtencion(Atencion atencion)
+        {
+            var atencionExistente = _contexto.Atenciones.FirstOrDefault(a => a.id == atencion.id);
+
+            if (atencionExistente == null)
+            {
+                return false;
+            }
+
+            if(atencionExistente.idEstado == 4)
+            {
+                return false;
+            }
+
+            foreach (var detalle in atencion.DetallesAtencion)
+            {
+                detalle.idAtencion = atencion.id;
+
+                var producto = _contexto.Productos.First(p => p.Id == detalle.idProducto);
+
+                producto.Stock -= detalle.cantidad;
+            }
+
+            _contexto.DetallesAtencion.AddRange(atencion.DetallesAtencion);
+
+
+            atencionExistente.idEstado = atencion.idEstado;
+            atencionExistente.totalCalculado = atencion.totalCalculado;
+            atencionExistente.totalProductos = atencion.totalProductos;
+            _contexto.SaveChanges();
+
+            return true;
         }
 
         public List<Cliente> ObtenerClientes()

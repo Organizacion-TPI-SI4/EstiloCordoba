@@ -1,4 +1,5 @@
-﻿using EstiloCordobaEntidades;
+﻿using APIEstiloCordoba.DTOs;
+using EstiloCordobaEntidades;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIEstiloCordoba.Controllers
@@ -24,6 +25,28 @@ namespace APIEstiloCordoba.Controllers
             return Ok(atenciones);
         }
 
+        [HttpGet("barberos/{idBarbero}")]
+        public IActionResult ObtenerAtencionesPorBarbero(int idBarbero)
+        {
+            List<Atencion> atenciones = _negocio.ObtenerAtencionesPorBarbero(idBarbero);
+            return Ok(atenciones);
+        }
+
+        [HttpGet("atencionesPorEstado")]
+        public IActionResult ObtenerAtencionesPorEstado()
+        {
+            List<Atencion> atenciones = _negocio.ObtenerAtencionesPorEstado();
+            return Ok(atenciones);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult ObtenerAtencionesPorId(int id)
+        {
+            Atencion atencion = _negocio.ObtenerAtencionPorId(id);
+            return Ok(atencion);
+        }
+
+
 
         [HttpPost]
         public IActionResult Registrar([FromBody] Atencion atencion)
@@ -46,5 +69,52 @@ namespace APIEstiloCordoba.Controllers
                 });
             }
         }
+
+        [HttpPost("cambiarEstado/{idEstado}/{idAtencion}")]
+        public IActionResult CambiarEstado(int idEstado, int idAtencion)
+            { 
+
+            try
+            {
+                if (_negocio.CambiarEstadoAtencion(idEstado, idAtencion))
+                {
+                    return Ok("Estado actualizado correctamente.");
+                }
+                else
+                {
+                    return Conflict("Ocurrio un error.(Negocio)");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensaje = ex.Message
+                });
+            }
+        }
+
+
+        [HttpPut]
+        public IActionResult Actualizar([FromBody] Atencion atencion)
+        {
+            try
+            {
+                if (_negocio.ActualizarAtencion(atencion))
+                {
+                    return Ok("Atención actualizada correctamente.");
+                }
+
+                return NotFound("No se encontró la atención.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensaje = ex.Message
+                });
+            }
+        }
+
     }
 }

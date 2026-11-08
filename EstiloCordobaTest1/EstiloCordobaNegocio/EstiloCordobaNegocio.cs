@@ -103,9 +103,83 @@ namespace EstiloCordobaNegocio
         }
 
 
+        public Producto ObtenerProductoPorId(int id)
+        {
+            return _datos.ObtenerProductoPorId(id);
+        }
+
+
         public List<Atencion> ObtenerAtenciones()
         {
             return _datos.ObtenerAtenciones();
+        }
+
+        public Atencion ObtenerAtencionPorId(int id)
+        {
+            return _datos.ObtenerAtencionPorId(id);
+        }
+
+        public List<Atencion> ObtenerAtencionesPorEstado()
+        {
+            return _datos.ObtenerAtencionesPorEstado();
+        }
+
+        public List<Atencion> ObtenerAtencionesPorBarbero(int idBarbero)
+        {
+            return _datos.ObtenerAtencionesPorBarbero(idBarbero);
+        }
+
+        public bool CambiarEstadoAtencion(int idEstado, int idAtencion)
+        {
+
+            int nuevoEstado;
+
+            switch (idEstado)
+            {
+                case 1:
+                    nuevoEstado = 2;
+                    break;
+
+                case 2:
+                    nuevoEstado = 3;
+                    break;
+
+                case 3:
+                    nuevoEstado = 4;
+                    break;
+
+                case 4:
+                    nuevoEstado = 5;
+                    break;
+
+                default:
+                    return false;
+            }
+
+            return _datos.CambiarEstadoAtencion(nuevoEstado, idAtencion);
+        }
+
+        public bool ActualizarAtencion(Atencion atencion)
+        {
+            foreach (var detalle in atencion.DetallesAtencion)
+            {
+                var producto = _datos.ObtenerProductoPorId(detalle.idProducto);
+
+                if (producto == null)
+                    return false;
+
+                if (detalle.cantidad > producto.Stock)
+                {
+                    return false;
+                }
+            }
+
+            return _datos.ActualizarAtencion(atencion);
+        }
+
+        public Estado ObtenerEstadoPorId(int id)
+        {
+            return _datos.ObtenerEstadoPorId(id);
         }
 
         public List<Cliente> ObtenerClientes()
@@ -124,6 +198,11 @@ namespace EstiloCordobaNegocio
             return _datos.ObtenerTurnos();
         }
 
+        public List<Turno> ObtenerNoAsignadosTurnos()
+        {
+            return _datos.ObtenerTurnosNoAsignados();
+        }
+
         public Turno ObtenerTurnoPorId(int id)
         {
             return _datos.ObtenerTurnoPorId(id);
@@ -139,7 +218,6 @@ namespace EstiloCordobaNegocio
             return _datos.ObtenerCategorias();
         }
        
-
         public List<Servicio> ObtenerServicios()
         {
             return _datos.ObtenerServicios();

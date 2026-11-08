@@ -22,6 +22,13 @@ namespace APIEstiloCordoba.Controllers
             return Ok(productos);
         }
 
+        [HttpGet("productoPorId/{id}")]
+        public IActionResult ObtenerProductoPorId(int id)
+        {
+            Producto producto = _negocio.ObtenerProductoPorId(id);
+            return Ok(producto);
+        }
+
         [HttpPost]
         public IActionResult Registrar([FromBody] Producto producto)
         {
@@ -51,9 +58,7 @@ namespace APIEstiloCordoba.Controllers
             }
         }
         [HttpPut("{id:int}")]
-        public IActionResult Modificar(
-    int id,
-    [FromBody] Producto producto)
+        public IActionResult Modificar(int id,[FromBody] Producto producto)
         {
             try
             {

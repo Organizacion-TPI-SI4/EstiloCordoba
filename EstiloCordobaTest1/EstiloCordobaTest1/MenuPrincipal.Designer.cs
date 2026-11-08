@@ -48,6 +48,7 @@
             administracionToolStripMenuItem4 = new ToolStripMenuItem();
             personalToolStripMenuItem = new ToolStripMenuItem();
             administracionToolStripMenuItem5 = new ToolStripMenuItem();
+            barberosToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -55,7 +56,7 @@
             // 
             menuStrip1.BackColor = SystemColors.MenuBar;
             menuStrip1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { menuToolStripMenuItem, turnosToolStripMenuItem, atencionesToolStripMenuItem, serviciosToolStripMenuItem, productosToolStripMenuItem, clientesToolStripMenuItem, personalToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { menuToolStripMenuItem, turnosToolStripMenuItem, atencionesToolStripMenuItem, serviciosToolStripMenuItem, productosToolStripMenuItem, clientesToolStripMenuItem, personalToolStripMenuItem, barberosToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1228, 29);
@@ -65,6 +66,7 @@
             // menuToolStripMenuItem
             // 
             menuToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cuentaToolStripMenuItem, cerrarSesionToolStripMenuItem, minimizarToolStripMenuItem, cerrarToolStripMenuItem });
+            menuToolStripMenuItem.ForeColor = SystemColors.HotTrack;
             menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             menuToolStripMenuItem.Size = new Size(64, 25);
             menuToolStripMenuItem.Text = "Menu";
@@ -99,6 +101,7 @@
             // turnosToolStripMenuItem
             // 
             turnosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { administracionToolStripMenuItem });
+            turnosToolStripMenuItem.ForeColor = SystemColors.HotTrack;
             turnosToolStripMenuItem.Name = "turnosToolStripMenuItem";
             turnosToolStripMenuItem.Size = new Size(71, 25);
             turnosToolStripMenuItem.Text = "Turnos";
@@ -113,6 +116,7 @@
             // atencionesToolStripMenuItem
             // 
             atencionesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { administracionToolStripMenuItem1 });
+            atencionesToolStripMenuItem.ForeColor = SystemColors.HotTrack;
             atencionesToolStripMenuItem.Name = "atencionesToolStripMenuItem";
             atencionesToolStripMenuItem.Size = new Size(104, 25);
             atencionesToolStripMenuItem.Text = "Atenciones";
@@ -127,6 +131,7 @@
             // serviciosToolStripMenuItem
             // 
             serviciosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { administracionToolStripMenuItem2, categoriasToolStripMenuItem });
+            serviciosToolStripMenuItem.ForeColor = SystemColors.HotTrack;
             serviciosToolStripMenuItem.Name = "serviciosToolStripMenuItem";
             serviciosToolStripMenuItem.Size = new Size(88, 25);
             serviciosToolStripMenuItem.Text = "Servicios";
@@ -148,6 +153,7 @@
             // productosToolStripMenuItem
             // 
             productosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { administracionToolStripMenuItem3 });
+            productosToolStripMenuItem.ForeColor = SystemColors.HotTrack;
             productosToolStripMenuItem.Name = "productosToolStripMenuItem";
             productosToolStripMenuItem.Size = new Size(97, 25);
             productosToolStripMenuItem.Text = "Productos";
@@ -161,6 +167,7 @@
             // clientesToolStripMenuItem
             // 
             clientesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { administracionToolStripMenuItem4 });
+            clientesToolStripMenuItem.ForeColor = SystemColors.HotTrack;
             clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
             clientesToolStripMenuItem.Size = new Size(80, 25);
             clientesToolStripMenuItem.Text = "Clientes";
@@ -175,6 +182,7 @@
             // personalToolStripMenuItem
             // 
             personalToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { administracionToolStripMenuItem5 });
+            personalToolStripMenuItem.ForeColor = SystemColors.HotTrack;
             personalToolStripMenuItem.Name = "personalToolStripMenuItem";
             personalToolStripMenuItem.Size = new Size(83, 25);
             personalToolStripMenuItem.Text = "Personal";
@@ -185,6 +193,14 @@
             administracionToolStripMenuItem5.Size = new Size(190, 26);
             administracionToolStripMenuItem5.Text = "Administracion";
             administracionToolStripMenuItem5.Click += administracionToolStripMenuItem5_Click;
+            // 
+            // barberosToolStripMenuItem
+            // 
+            barberosToolStripMenuItem.ForeColor = SystemColors.HotTrack;
+            barberosToolStripMenuItem.Name = "barberosToolStripMenuItem";
+            barberosToolStripMenuItem.Size = new Size(88, 25);
+            barberosToolStripMenuItem.Text = "Barberos";
+            barberosToolStripMenuItem.Click += barberosToolStripMenuItem_Click;
             // 
             // MenuPrincipal
             // 
@@ -226,5 +242,6 @@
         private ToolStripMenuItem administracionToolStripMenuItem4;
         private ToolStripMenuItem administracionToolStripMenuItem5;
         private ToolStripMenuItem categoriasToolStripMenuItem;
+        private ToolStripMenuItem barberosToolStripMenuItem;
     }
 }
