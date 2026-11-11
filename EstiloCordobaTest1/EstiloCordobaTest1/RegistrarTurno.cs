@@ -102,7 +102,37 @@ namespace EstiloCordobaPresentacion
 
         private async void btnRegistrar_Click(object sender, EventArgs e)
         {
-            if(serviciosSeleccionados.Count == 0)
+            DateOnly fechaElegida = DateOnly.FromDateTime(dtpFecha.Value.Date);
+
+            if(TimeOnly.TryParse(txtHora.Text, out TimeOnly horaElegida))
+            {
+                string url = $"api/turnos/horarioOcupado/{fechaElegida:yyyy-MM-dd}/{horaElegida:HH:mm:ss}";
+
+                var horarioOcupadoResponse = await _httpClient.GetAsync(url);
+
+                if (!horarioOcupadoResponse.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("No se pudo comprobar la disponibilidad del horario.");
+                    return;
+                }
+
+                bool horarioOcupado = await horarioOcupadoResponse.Content.ReadFromJsonAsync<bool>();
+
+                if (horarioOcupado)
+                {
+                    MessageBox.Show("El horario seleccionado ya está ocupado.");
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ingresá una hora válida (HH:mm).");
+                return;
+            }
+
+
+
+            if (serviciosSeleccionados.Count == 0)
             {
                 MessageBox.Show("Seleccioná al menos un servicio.");
                 return;
@@ -114,15 +144,11 @@ namespace EstiloCordobaPresentacion
                 return;
             }
 
-            if (!TimeOnly.TryParse(txtHora.Text, out TimeOnly horaSeleccionada))
-            {
-                MessageBox.Show("Ingresá una hora válida (HH:mm).");
-                return;
-            }
+            
 
-            if (horaSeleccionada < TimeOnly.FromDateTime(DateTime.Now))
+            if (horaElegida < TimeOnly.FromDateTime(DateTime.Now) && DateOnly.FromDateTime(dtpFecha.Value.Date) == DateOnly.FromDateTime(DateTime.Now))
             {
-                MessageBox.Show("La hora del turno no puede ser anterior a la hora actual.");
+                MessageBox.Show("La hora del turno no puede ser anterior al dia y hora actual.");
                 return;
             }
 
@@ -148,7 +174,7 @@ namespace EstiloCordobaPresentacion
                 idCliente = ((Cliente)cmbCliente.SelectedItem).Id,
                 Fecha = DateOnly.FromDateTime(dtpFecha.Value.Date),
                 DetallesTurno = detalles,
-                Hora = horaSeleccionada
+                Hora = horaElegida
             };
 
             

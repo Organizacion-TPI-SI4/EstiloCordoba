@@ -348,6 +348,7 @@
             MaximizeBox = false;
             Name = "RegistrarAtencion";
             Text = "Registrar atencion";
+            Load += RegistrarAtencion_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvServiciosTurno).EndInit();

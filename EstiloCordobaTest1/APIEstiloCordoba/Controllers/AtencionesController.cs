@@ -46,8 +46,6 @@ namespace APIEstiloCordoba.Controllers
             return Ok(atencion);
         }
 
-
-
         [HttpPost]
         public IActionResult Registrar([FromBody] Atencion atencion)
         {

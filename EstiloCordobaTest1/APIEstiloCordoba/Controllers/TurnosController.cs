@@ -40,6 +40,13 @@ namespace APIEstiloCordoba.Controllers
             return Ok(turno);
         }
 
+        [HttpGet("horarioOcupado/{fecha}/{hora}")]
+        public IActionResult ObtenerTurnoHorarioOcupado([FromRoute] DateOnly fecha, [FromRoute] TimeOnly hora)
+        {
+            bool turnoOcupado = _negocio.ObtenerTurnoHorarioOcupado(fecha, hora);
+            return Ok(turnoOcupado);
+        }
+
         [HttpPost]
         public IActionResult Registrar([FromBody] Turno turno)
         {

@@ -27,15 +27,21 @@ namespace EstiloCordobaPresentacion
         public RegistrarAtencion()
         {
             InitializeComponent();
-            CargarTurnos();
-            CargarBarberos();
         }
 
 
-        private async void CargarTurnos()
+        private async Task CargarTurnos()
         {
 
             var turnos = await _httpClient.GetFromJsonAsync<List<Turno>>("api/turnos/noasignados");
+
+            if (turnos == null || turnos.Count == 0)
+            {
+                cmbTurno.DataSource = null;
+                btnAceptar.Enabled = false;
+                MessageBox.Show("No hay turnos disponibles.");
+                return;
+            }
 
             cmbTurno.DataSource = turnos.Select(t => new { t.id, Descripcion = $"Cliente: {t.ClienteNombre} - Id Turno: {t.id}" }).ToList();
 
@@ -43,19 +49,33 @@ namespace EstiloCordobaPresentacion
             cmbTurno.ValueMember = "Id";
         }
 
-        private async void CargarBarberos()
+        private async Task CargarBarberos()
         {
-            var barberos = await _httpClient.GetFromJsonAsync<List<Empleado>>("api/empleados/barberos");
-
-            if (barberos != null)
+            try
             {
-                cmbBarbero.DataSource = barberos.Select(b => new { b.Id, Descripcion = $"Barbero: {b.Nombre} - Id Barbero: {b.Id}" }).ToList();
+                var barberos = await _httpClient.GetFromJsonAsync<List<Empleado>>("api/empleados/barberos");
+
+                if (barberos == null || barberos.Count == 0)
+                {
+                    cmbBarbero.DataSource = null;
+                    btnRegistrar.Enabled = false;
+
+                    MessageBox.Show("No hay barberos disponibles.");
+                    return;
+                }
+
+                cmbBarbero.DataSource = barberos.Select(b => new
+                {
+                    b.Id,
+                    Descripcion = $"Barbero: {b.Nombre} - Id Barbero: {b.Id}"
+                }).ToList();
+
                 cmbBarbero.DisplayMember = "Descripcion";
                 cmbBarbero.ValueMember = "Id";
             }
-            else
+            catch (HttpRequestException ex)
             {
-                MessageBox.Show("No hay barberos disponibles.");
+                MessageBox.Show("Error al cargar los barberos: " + ex.Message);
                 btnRegistrar.Enabled = false;
             }
         }
@@ -130,6 +150,13 @@ namespace EstiloCordobaPresentacion
         private async void btnRegistrar_Click(object sender, EventArgs e)
         {
 
+            if (cmbBarbero.SelectedValue == null)
+            {
+                MessageBox.Show("No hay ningún barbero disponible para asignar.");
+                return;
+            }
+
+
             if (!turnoSeleccionado)
             {
                 MessageBox.Show("Debe seleccionar un turno.");
@@ -163,6 +190,12 @@ namespace EstiloCordobaPresentacion
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void RegistrarAtencion_Load(object sender, EventArgs e)
+        {
+            CargarTurnos();
+            CargarBarberos();
         }
     }
 }

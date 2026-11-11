@@ -47,6 +47,11 @@ namespace EstiloCordobaPresentacion
                 {
                     if (decimal.TryParse(txtPrecio.Text, out decimal precio))
                     {
+                        if(precio<0)
+                        {
+                            MessageBox.Show("El precio no puede ser negativo.");
+                            return;
+                        }
                         if (cmbCategoria.SelectedValue == null)
                         {
                             MessageBox.Show("Seleccioná una categoría.");

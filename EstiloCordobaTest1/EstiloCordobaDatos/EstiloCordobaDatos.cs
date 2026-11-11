@@ -222,6 +222,13 @@ namespace EstiloCordobaDatos
             }   
         }
 
+        public bool ObtenerTurnoHorarioOcupado(DateOnly fecha, TimeOnly hora)
+        {
+            bool existe = _contexto.Turnos.Any(t => t.Fecha == fecha && t.Hora == hora);
+
+            return existe;
+        }
+
         public Estado ObtenerEstadoPorId(int id)
         {
             if (!_contexto.Estados.Any(e => e.id == id))

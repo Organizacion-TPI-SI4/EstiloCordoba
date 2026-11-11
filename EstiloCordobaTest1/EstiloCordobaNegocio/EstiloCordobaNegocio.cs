@@ -218,6 +218,11 @@ namespace EstiloCordobaNegocio
             return _datos.ObtenerTurnoPorId(id);
         }
 
+        public bool ObtenerTurnoHorarioOcupado(DateOnly fecha, TimeOnly hora)
+        {
+            return _datos.ObtenerTurnoHorarioOcupado(fecha, hora);
+        }
+
         public List<DetTurno> ObtenerDetallesTurno(int id)
         {
             return _datos.ObtenerDetallesTurno(id);
