@@ -83,5 +83,22 @@ namespace EstiloCordobaPresentacion
             formHijo.MdiParent = this.MdiParent;
             formHijo.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (Form formulario in this.MdiParent.MdiChildren)
+            {
+                if (formulario is CobrarAtencion)
+                {
+                    formulario.BringToFront();
+                    formulario.Activate();
+                    return;
+                }
+            }
+
+            CobrarAtencion formHijo = new CobrarAtencion();
+            formHijo.MdiParent = this.MdiParent;
+            formHijo.Show();
+        }
     }
 }

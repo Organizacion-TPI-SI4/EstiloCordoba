@@ -340,6 +340,40 @@ namespace EstiloCordobaEF.Migrations
                         });
                 });
 
+            modelBuilder.Entity("EstiloCordobaEntidades.MedioPago", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("MediosPago");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            descripcion = "Efectivo/Transferencia"
+                        },
+                        new
+                        {
+                            id = 2,
+                            descripcion = "Tarjeta de crédito"
+                        },
+                        new
+                        {
+                            id = 3,
+                            descripcion = "Tarjeta de débito"
+                        });
+                });
+
             modelBuilder.Entity("EstiloCordobaEntidades.Producto", b =>
                 {
                     b.Property<int>("Id")

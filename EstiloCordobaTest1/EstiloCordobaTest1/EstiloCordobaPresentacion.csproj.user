@@ -28,6 +28,9 @@
     <Compile Update="AtencionFinalizadas.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="CobrarAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="IniciarSesion.cs">
       <SubType>Form</SubType>
     </Compile>

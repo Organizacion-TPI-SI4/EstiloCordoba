@@ -118,6 +118,7 @@
             button1.TabIndex = 4;
             button1.Text = "Pendiente de pago";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // textBox1
             // 

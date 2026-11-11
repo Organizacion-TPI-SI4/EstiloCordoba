@@ -46,6 +46,19 @@ namespace EstiloCordobaDatos
             }
         }
 
+        public bool CobrarAtencion(int idEstado, int idAtencion, int idMedioPago)
+        {
+            var atencion = _contexto.Atenciones.FirstOrDefault(a => a.id == idAtencion);
+            if (atencion == null)
+            {
+                return false;
+            }
+            atencion.idEstado = idEstado;
+            atencion.idMedioPago = idMedioPago;
+            _contexto.SaveChanges();
+            return true;
+        }
+
         public bool RegistrarTurno(Turno turno)
         {
                 _contexto.Turnos.Add(turno);
@@ -166,7 +179,10 @@ namespace EstiloCordobaDatos
             return true;
         }
 
-
+        public List<MedioPago> ObtenerMedios()
+        {
+            return _contexto.MediosPago.AsNoTracking().ToList();
+        }   
 
         public List<Producto> ObtenerProductos()
         {
@@ -235,14 +251,14 @@ namespace EstiloCordobaDatos
             .FirstOrDefault(a => a.id == id);
         }
 
-        public List<Atencion> ObtenerAtencionesPorEstado()
+        public List<Atencion> ObtenerAtencionesPorEstado(int idEstado)
         {
             return _contexto.Atenciones
                 .AsNoTracking()
                 .Include(a => a.Estado)
                 .Include(a => a.Cliente)
                 .Include(a => a.Turno)
-                .Where(a => a.idEstado == 3)
+                .Where(a => a.idEstado == idEstado)
                 .ToList();
         }
 

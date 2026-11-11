@@ -30,6 +30,8 @@ namespace EstiloCordobaEF
 
         public DbSet<Estado> Estados => Set<Estado>();
 
+        public DbSet<MedioPago> MediosPago => Set<MedioPago>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -232,6 +234,23 @@ namespace EstiloCordobaEF
                  nombreEstado = "Cobrada"
               }
              );
+
+            modelBuilder.Entity<MedioPago>().HasData(
+            new MedioPago
+            {
+                id = 1,
+                descripcion = "Efectivo/Transferencia"
+            },
+            new MedioPago
+            {
+                id = 2,
+                descripcion = "Tarjeta de crédito"
+            },
+            new MedioPago
+            {
+                id = 3,
+                descripcion = "Tarjeta de débito"
+            });
         }   
     }
 }

@@ -97,6 +97,11 @@ namespace EstiloCordobaNegocio
             }
         }
 
+        public List<MedioPago> ObtenerMedios()
+        {
+            return _datos.ObtenerMedios();
+        }
+
         public List<Producto> ObtenerProductos()
         {
             return _datos.ObtenerProductos();
@@ -119,9 +124,9 @@ namespace EstiloCordobaNegocio
             return _datos.ObtenerAtencionPorId(id);
         }
 
-        public List<Atencion> ObtenerAtencionesPorEstado()
+        public List<Atencion> ObtenerAtencionesPorEstado(int idEstado)
         {
-            return _datos.ObtenerAtencionesPorEstado();
+            return _datos.ObtenerAtencionesPorEstado(idEstado);
         }
 
         public List<Atencion> ObtenerAtencionesPorBarbero(int idBarbero)
@@ -175,6 +180,11 @@ namespace EstiloCordobaNegocio
             }
 
             return _datos.ActualizarAtencion(atencion);
+        }
+
+        public bool CobrarAtencion(int idEstado, int idAtencion, int idMedioPago)
+        {
+            return _datos.CobrarAtencion(idEstado, idAtencion, idMedioPago);
         }
 
         public Estado ObtenerEstadoPorId(int id)

@@ -48,7 +48,7 @@ namespace EstiloCordobaPresentacion
         {
             try
             {
-                var atencionesFinalizadas = await _httpClient.GetFromJsonAsync<List<Atencion>>("api/atenciones/atencionesPorEstado");
+                var atencionesFinalizadas = await _httpClient.GetFromJsonAsync<List<Atencion>>("api/atenciones/atencionesPorEstado/3");
                 bsAtencionFinalizada.DataSource = atencionesFinalizadas ?? new List<Atencion>();
                 dgvAtencionFinalizada.DataSource = bsAtencionFinalizada;
 

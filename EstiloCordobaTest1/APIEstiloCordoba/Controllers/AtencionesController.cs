@@ -32,10 +32,10 @@ namespace APIEstiloCordoba.Controllers
             return Ok(atenciones);
         }
 
-        [HttpGet("atencionesPorEstado")]
-        public IActionResult ObtenerAtencionesPorEstado()
+        [HttpGet("atencionesPorEstado/{idEstado}")]
+        public IActionResult ObtenerAtencionesPorEstado(int idEstado)
         {
-            List<Atencion> atenciones = _negocio.ObtenerAtencionesPorEstado();
+            List<Atencion> atenciones = _negocio.ObtenerAtencionesPorEstado(idEstado);
             return Ok(atenciones);
         }
 
@@ -79,6 +79,29 @@ namespace APIEstiloCordoba.Controllers
                 if (_negocio.CambiarEstadoAtencion(idEstado, idAtencion))
                 {
                     return Ok("Estado actualizado correctamente.");
+                }
+                else
+                {
+                    return Conflict("Ocurrio un error.(Negocio)");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensaje = ex.Message
+                });
+            }
+        }
+
+        [HttpPost("CobrarAtencion/{idEstado}/{idAtencion}/{idMedioPago}")]
+        public IActionResult CobrarAtencion(int idEstado, int idAtencion, int idMedioPago)
+        {
+            try
+            {
+                if (_negocio.CobrarAtencion(idEstado, idAtencion, idMedioPago))
+                {
+                    return Ok("Atención cobrada correctamente.");
                 }
                 else
                 {
