@@ -121,6 +121,15 @@ namespace APIEstiloCordoba.Controllers
         {
             try
             {
+                foreach (DetAtencion detalle in atencion.DetallesAtencion)
+                {
+                    if (!_negocio.StockSuficiente(detalle, detalle.cantidad))
+                    {
+                        return Conflict("No hay suficiente stock para uno o más productos.");
+                    }
+                }
+
+
                 if (_negocio.ActualizarAtencion(atencion))
                 {
                     return Ok("Atención actualizada correctamente.");

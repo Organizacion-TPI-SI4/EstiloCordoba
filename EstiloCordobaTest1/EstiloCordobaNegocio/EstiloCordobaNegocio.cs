@@ -166,19 +166,6 @@ namespace EstiloCordobaNegocio
 
         public bool ActualizarAtencion(Atencion atencion)
         {
-            foreach (var detalle in atencion.DetallesAtencion)
-            {
-                var producto = _datos.ObtenerProductoPorId(detalle.idProducto);
-
-                if (producto == null)
-                    return false;
-
-                if (detalle.cantidad > producto.Stock)
-                {
-                    return false;
-                }
-            }
-
             return _datos.ActualizarAtencion(atencion);
         }
 
@@ -253,6 +240,17 @@ namespace EstiloCordobaNegocio
             return _datos.ObtenerEmpleadosBarberos();
         }
 
+        public bool StockSuficiente(DetAtencion detalle, int cantidad)
+        {
+            var producto = _datos.ObtenerProductoPorId(detalle.idProducto);
+
+            if (producto.Stock >= cantidad)
+            {
+                return true;
+            }    
+            return false;
+        }
+
         public Empleado? ValidarLogin(string email, string clave)
         {
             var empleado = _datos.ObtenerEmpleadoPorEmail(email.Trim());
@@ -264,7 +262,5 @@ namespace EstiloCordobaNegocio
 
             return empleado;
         }
-
-
     }
 }

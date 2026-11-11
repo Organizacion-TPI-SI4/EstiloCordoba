@@ -41,7 +41,7 @@ namespace EstiloCordobaPresentacion
 
             cmbProductos.DisplayMember = "Descripcion";
             cmbProductos.ValueMember = "Id";
-            cmbProductos.DataSource = productos.Select(a => new { a.Id, Descripcion = a.Nombre + " " + a.Marca + " " + a.PrecioVenta }).ToList();
+            cmbProductos.DataSource = productos.Select(a => new { a.Id, Descripcion = a.Nombre + " " + a.Marca + " " + a.PrecioVenta + " - Stock: " + a.Stock }).ToList();
         }
 
         private async void CargarAtencionesFinalizadas()
@@ -114,6 +114,7 @@ namespace EstiloCordobaPresentacion
                 MessageBox.Show("Este producto ya fue agregado.");
                 return;
             }
+
             productoPorId.Cantidad = (int)numeroCantidad.Value;
             productoPorId.Subtotal = (int)numeroCantidad.Value * productoPorId.PrecioVenta;
             ProductosSeleccionados.Add(productoPorId);
@@ -147,7 +148,6 @@ namespace EstiloCordobaPresentacion
                     idAtencion = idAtencion,
                     cantidad = producto.Cantidad
                 }; 
-
                 detalles.Add(detalle);
             }
 
@@ -170,11 +170,17 @@ namespace EstiloCordobaPresentacion
             if (respuesta.IsSuccessStatusCode)
             {
                 MessageBox.Show("Atención actualizada correctamente.");
+                this.Close();
             }
             else
             {
                 string error = await respuesta.Content.ReadAsStringAsync();
                 MessageBox.Show(error);
+                ProductosSeleccionados.Clear();
+                dgvProductos.DataSource = ProductosSeleccionados;
+
+                var atencionPorId = await _httpClient.GetFromJsonAsync<Atencion>($"api/atenciones/{cmbAtencionFinalizada.SelectedValue}");
+                lblTotalAtencion.Text = atencionPorId.totalServicios.ToString();
             }
         }   
     }

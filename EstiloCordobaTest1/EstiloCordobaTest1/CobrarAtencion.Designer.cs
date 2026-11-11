@@ -31,21 +31,6 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CobrarAtencion));
             dgvAtencionCobrar = new DataGridView();
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            fechaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            horaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            totalCalculadoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            totalServiciosDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            totalProductosDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            idBarberoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            idClienteDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            idTurnoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            idEstadoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            idMedioPagoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            clienteDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            turnoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            estadoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            empleadoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             bsAtencionCobrar = new BindingSource(components);
             label1 = new Label();
             cmbAtencionCobrar = new ComboBox();
@@ -61,6 +46,17 @@
             lblNombreCliente = new Label();
             lblTotalCobrar = new Label();
             label7 = new Label();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            fechaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            horaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            totalCalculadoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            totalServiciosDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            totalProductosDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idBarberoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idClienteDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idTurnoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idEstadoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idMedioPagoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvAtencionCobrar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsAtencionCobrar).BeginInit();
             SuspendLayout();
@@ -69,102 +65,12 @@
             // 
             dgvAtencionCobrar.AutoGenerateColumns = false;
             dgvAtencionCobrar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAtencionCobrar.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, fechaDataGridViewTextBoxColumn, horaDataGridViewTextBoxColumn, totalCalculadoDataGridViewTextBoxColumn, totalServiciosDataGridViewTextBoxColumn, totalProductosDataGridViewTextBoxColumn, idBarberoDataGridViewTextBoxColumn, idClienteDataGridViewTextBoxColumn, idTurnoDataGridViewTextBoxColumn, idEstadoDataGridViewTextBoxColumn, idMedioPagoDataGridViewTextBoxColumn, clienteDataGridViewTextBoxColumn, turnoDataGridViewTextBoxColumn, estadoDataGridViewTextBoxColumn, empleadoDataGridViewTextBoxColumn });
+            dgvAtencionCobrar.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, fechaDataGridViewTextBoxColumn, horaDataGridViewTextBoxColumn, totalCalculadoDataGridViewTextBoxColumn, totalServiciosDataGridViewTextBoxColumn, totalProductosDataGridViewTextBoxColumn, idBarberoDataGridViewTextBoxColumn, idClienteDataGridViewTextBoxColumn, idTurnoDataGridViewTextBoxColumn, idEstadoDataGridViewTextBoxColumn, idMedioPagoDataGridViewTextBoxColumn });
             dgvAtencionCobrar.DataSource = bsAtencionCobrar;
             dgvAtencionCobrar.Location = new Point(12, 33);
             dgvAtencionCobrar.Name = "dgvAtencionCobrar";
             dgvAtencionCobrar.Size = new Size(650, 150);
             dgvAtencionCobrar.TabIndex = 0;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.DataPropertyName = "id";
-            idDataGridViewTextBoxColumn.HeaderText = "id";
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            // 
-            // fechaDataGridViewTextBoxColumn
-            // 
-            fechaDataGridViewTextBoxColumn.DataPropertyName = "fecha";
-            fechaDataGridViewTextBoxColumn.HeaderText = "fecha";
-            fechaDataGridViewTextBoxColumn.Name = "fechaDataGridViewTextBoxColumn";
-            // 
-            // horaDataGridViewTextBoxColumn
-            // 
-            horaDataGridViewTextBoxColumn.DataPropertyName = "hora";
-            horaDataGridViewTextBoxColumn.HeaderText = "hora";
-            horaDataGridViewTextBoxColumn.Name = "horaDataGridViewTextBoxColumn";
-            // 
-            // totalCalculadoDataGridViewTextBoxColumn
-            // 
-            totalCalculadoDataGridViewTextBoxColumn.DataPropertyName = "totalCalculado";
-            totalCalculadoDataGridViewTextBoxColumn.HeaderText = "totalCalculado";
-            totalCalculadoDataGridViewTextBoxColumn.Name = "totalCalculadoDataGridViewTextBoxColumn";
-            // 
-            // totalServiciosDataGridViewTextBoxColumn
-            // 
-            totalServiciosDataGridViewTextBoxColumn.DataPropertyName = "totalServicios";
-            totalServiciosDataGridViewTextBoxColumn.HeaderText = "totalServicios";
-            totalServiciosDataGridViewTextBoxColumn.Name = "totalServiciosDataGridViewTextBoxColumn";
-            // 
-            // totalProductosDataGridViewTextBoxColumn
-            // 
-            totalProductosDataGridViewTextBoxColumn.DataPropertyName = "totalProductos";
-            totalProductosDataGridViewTextBoxColumn.HeaderText = "totalProductos";
-            totalProductosDataGridViewTextBoxColumn.Name = "totalProductosDataGridViewTextBoxColumn";
-            // 
-            // idBarberoDataGridViewTextBoxColumn
-            // 
-            idBarberoDataGridViewTextBoxColumn.DataPropertyName = "idBarbero";
-            idBarberoDataGridViewTextBoxColumn.HeaderText = "idBarbero";
-            idBarberoDataGridViewTextBoxColumn.Name = "idBarberoDataGridViewTextBoxColumn";
-            // 
-            // idClienteDataGridViewTextBoxColumn
-            // 
-            idClienteDataGridViewTextBoxColumn.DataPropertyName = "idCliente";
-            idClienteDataGridViewTextBoxColumn.HeaderText = "idCliente";
-            idClienteDataGridViewTextBoxColumn.Name = "idClienteDataGridViewTextBoxColumn";
-            // 
-            // idTurnoDataGridViewTextBoxColumn
-            // 
-            idTurnoDataGridViewTextBoxColumn.DataPropertyName = "idTurno";
-            idTurnoDataGridViewTextBoxColumn.HeaderText = "idTurno";
-            idTurnoDataGridViewTextBoxColumn.Name = "idTurnoDataGridViewTextBoxColumn";
-            // 
-            // idEstadoDataGridViewTextBoxColumn
-            // 
-            idEstadoDataGridViewTextBoxColumn.DataPropertyName = "idEstado";
-            idEstadoDataGridViewTextBoxColumn.HeaderText = "idEstado";
-            idEstadoDataGridViewTextBoxColumn.Name = "idEstadoDataGridViewTextBoxColumn";
-            // 
-            // idMedioPagoDataGridViewTextBoxColumn
-            // 
-            idMedioPagoDataGridViewTextBoxColumn.DataPropertyName = "idMedioPago";
-            idMedioPagoDataGridViewTextBoxColumn.HeaderText = "idMedioPago";
-            idMedioPagoDataGridViewTextBoxColumn.Name = "idMedioPagoDataGridViewTextBoxColumn";
-            // 
-            // clienteDataGridViewTextBoxColumn
-            // 
-            clienteDataGridViewTextBoxColumn.DataPropertyName = "Cliente";
-            clienteDataGridViewTextBoxColumn.HeaderText = "Cliente";
-            clienteDataGridViewTextBoxColumn.Name = "clienteDataGridViewTextBoxColumn";
-            // 
-            // turnoDataGridViewTextBoxColumn
-            // 
-            turnoDataGridViewTextBoxColumn.DataPropertyName = "Turno";
-            turnoDataGridViewTextBoxColumn.HeaderText = "Turno";
-            turnoDataGridViewTextBoxColumn.Name = "turnoDataGridViewTextBoxColumn";
-            // 
-            // estadoDataGridViewTextBoxColumn
-            // 
-            estadoDataGridViewTextBoxColumn.DataPropertyName = "Estado";
-            estadoDataGridViewTextBoxColumn.HeaderText = "Estado";
-            estadoDataGridViewTextBoxColumn.Name = "estadoDataGridViewTextBoxColumn";
-            // 
-            // empleadoDataGridViewTextBoxColumn
-            // 
-            empleadoDataGridViewTextBoxColumn.DataPropertyName = "Empleado";
-            empleadoDataGridViewTextBoxColumn.HeaderText = "Empleado";
-            empleadoDataGridViewTextBoxColumn.Name = "empleadoDataGridViewTextBoxColumn";
             // 
             // bsAtencionCobrar
             // 
@@ -320,6 +226,72 @@
             label7.TabIndex = 14;
             label7.Text = "$";
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            idDataGridViewTextBoxColumn.HeaderText = "id";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            // 
+            // fechaDataGridViewTextBoxColumn
+            // 
+            fechaDataGridViewTextBoxColumn.DataPropertyName = "fecha";
+            fechaDataGridViewTextBoxColumn.HeaderText = "fecha";
+            fechaDataGridViewTextBoxColumn.Name = "fechaDataGridViewTextBoxColumn";
+            // 
+            // horaDataGridViewTextBoxColumn
+            // 
+            horaDataGridViewTextBoxColumn.DataPropertyName = "hora";
+            horaDataGridViewTextBoxColumn.HeaderText = "hora";
+            horaDataGridViewTextBoxColumn.Name = "horaDataGridViewTextBoxColumn";
+            // 
+            // totalCalculadoDataGridViewTextBoxColumn
+            // 
+            totalCalculadoDataGridViewTextBoxColumn.DataPropertyName = "totalCalculado";
+            totalCalculadoDataGridViewTextBoxColumn.HeaderText = "totalCalculado";
+            totalCalculadoDataGridViewTextBoxColumn.Name = "totalCalculadoDataGridViewTextBoxColumn";
+            // 
+            // totalServiciosDataGridViewTextBoxColumn
+            // 
+            totalServiciosDataGridViewTextBoxColumn.DataPropertyName = "totalServicios";
+            totalServiciosDataGridViewTextBoxColumn.HeaderText = "totalServicios";
+            totalServiciosDataGridViewTextBoxColumn.Name = "totalServiciosDataGridViewTextBoxColumn";
+            // 
+            // totalProductosDataGridViewTextBoxColumn
+            // 
+            totalProductosDataGridViewTextBoxColumn.DataPropertyName = "totalProductos";
+            totalProductosDataGridViewTextBoxColumn.HeaderText = "totalProductos";
+            totalProductosDataGridViewTextBoxColumn.Name = "totalProductosDataGridViewTextBoxColumn";
+            // 
+            // idBarberoDataGridViewTextBoxColumn
+            // 
+            idBarberoDataGridViewTextBoxColumn.DataPropertyName = "idBarbero";
+            idBarberoDataGridViewTextBoxColumn.HeaderText = "idBarbero";
+            idBarberoDataGridViewTextBoxColumn.Name = "idBarberoDataGridViewTextBoxColumn";
+            // 
+            // idClienteDataGridViewTextBoxColumn
+            // 
+            idClienteDataGridViewTextBoxColumn.DataPropertyName = "idCliente";
+            idClienteDataGridViewTextBoxColumn.HeaderText = "idCliente";
+            idClienteDataGridViewTextBoxColumn.Name = "idClienteDataGridViewTextBoxColumn";
+            // 
+            // idTurnoDataGridViewTextBoxColumn
+            // 
+            idTurnoDataGridViewTextBoxColumn.DataPropertyName = "idTurno";
+            idTurnoDataGridViewTextBoxColumn.HeaderText = "idTurno";
+            idTurnoDataGridViewTextBoxColumn.Name = "idTurnoDataGridViewTextBoxColumn";
+            // 
+            // idEstadoDataGridViewTextBoxColumn
+            // 
+            idEstadoDataGridViewTextBoxColumn.DataPropertyName = "idEstado";
+            idEstadoDataGridViewTextBoxColumn.HeaderText = "idEstado";
+            idEstadoDataGridViewTextBoxColumn.Name = "idEstadoDataGridViewTextBoxColumn";
+            // 
+            // idMedioPagoDataGridViewTextBoxColumn
+            // 
+            idMedioPagoDataGridViewTextBoxColumn.DataPropertyName = "idMedioPago";
+            idMedioPagoDataGridViewTextBoxColumn.HeaderText = "idMedioPago";
+            idMedioPagoDataGridViewTextBoxColumn.Name = "idMedioPagoDataGridViewTextBoxColumn";
+            // 
             // CobrarAtencion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -355,21 +327,6 @@
         #endregion
 
         private DataGridView dgvAtencionCobrar;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn fechaDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn horaDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn totalCalculadoDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn totalServiciosDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn totalProductosDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn idBarberoDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn idClienteDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn idTurnoDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn idEstadoDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn idMedioPagoDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn clienteDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn turnoDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn estadoDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn empleadoDataGridViewTextBoxColumn;
         private BindingSource bsAtencionCobrar;
         private Label label1;
         private ComboBox cmbAtencionCobrar;
@@ -385,5 +342,16 @@
         private Label lblNombreCliente;
         private Label lblTotalCobrar;
         private Label label7;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn fechaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn horaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn totalCalculadoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn totalServiciosDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn totalProductosDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idBarberoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idClienteDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idTurnoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idEstadoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idMedioPagoDataGridViewTextBoxColumn;
     }
 }
