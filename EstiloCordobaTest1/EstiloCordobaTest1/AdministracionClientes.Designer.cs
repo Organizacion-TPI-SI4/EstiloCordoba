@@ -35,6 +35,9 @@
             btnRegistrar = new Button();
             btnModificar = new Button();
             dgvClientes = new DataGridView();
+            bsClientes = new BindingSource(components);
+            txtBuscar = new TextBox();
+            Id = new DataGridViewTextBoxColumn();
             nombreDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             apellidoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             tipoDniDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -43,8 +46,6 @@
             emailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             localidadDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             redsocialDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            bsClientes = new BindingSource(components);
-            txtBuscar = new TextBox();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClientes).BeginInit();
@@ -97,13 +98,32 @@
             // 
             dgvClientes.AutoGenerateColumns = false;
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Columns.AddRange(new DataGridViewColumn[] { nombreDataGridViewTextBoxColumn, apellidoDataGridViewTextBoxColumn, tipoDniDataGridViewTextBoxColumn, numeroDniDataGridViewTextBoxColumn, telefonoDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, localidadDataGridViewTextBoxColumn, redsocialDataGridViewTextBoxColumn });
+            dgvClientes.Columns.AddRange(new DataGridViewColumn[] { Id, nombreDataGridViewTextBoxColumn, apellidoDataGridViewTextBoxColumn, tipoDniDataGridViewTextBoxColumn, numeroDniDataGridViewTextBoxColumn, telefonoDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, localidadDataGridViewTextBoxColumn, redsocialDataGridViewTextBoxColumn });
             dgvClientes.DataSource = bsClientes;
             dgvClientes.Location = new Point(217, 47);
             dgvClientes.Name = "dgvClientes";
             dgvClientes.ReadOnly = true;
             dgvClientes.Size = new Size(945, 391);
             dgvClientes.TabIndex = 1;
+            // 
+            // bsClientes
+            // 
+            bsClientes.DataSource = typeof(EstiloCordobaEntidades.Cliente);
+            // 
+            // txtBuscar
+            // 
+            txtBuscar.Location = new Point(217, 13);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.PlaceholderText = "Buscar...";
+            txtBuscar.Size = new Size(943, 23);
+            txtBuscar.TabIndex = 2;
+            // 
+            // Id
+            // 
+            Id.DataPropertyName = "Id";
+            Id.HeaderText = "Id";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
             // 
             // nombreDataGridViewTextBoxColumn
             // 
@@ -161,18 +181,6 @@
             redsocialDataGridViewTextBoxColumn.Name = "redsocialDataGridViewTextBoxColumn";
             redsocialDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // bsClientes
-            // 
-            bsClientes.DataSource = typeof(EstiloCordobaEntidades.Cliente);
-            // 
-            // txtBuscar
-            // 
-            txtBuscar.Location = new Point(217, 13);
-            txtBuscar.Name = "txtBuscar";
-            txtBuscar.PlaceholderText = "Buscar...";
-            txtBuscar.Size = new Size(943, 23);
-            txtBuscar.TabIndex = 2;
-            // 
             // AdministracionClientes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -202,6 +210,8 @@
         private DataGridView dgvClientes;
         private TextBox txtBuscar;
         private BindingSource bsClientes;
+        private DataGridViewTextBoxColumn idBeneficioDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn apellidoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn tipoDniDataGridViewTextBoxColumn;
@@ -210,6 +220,5 @@
         private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn localidadDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn redsocialDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn idBeneficioDataGridViewTextBoxColumn;
     }
 }

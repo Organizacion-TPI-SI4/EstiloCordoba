@@ -109,9 +109,17 @@ namespace EstiloCordobaPresentacion
             var productoPorId = await _httpClient.GetFromJsonAsync<Producto>($"api/productos/productoPorId/{cmbProductos.SelectedValue}");
             dgvProductos.DataSource = ProductosSeleccionados;
 
+
+
             if (ProductosSeleccionados.Any(p => p.Id == productoPorId.Id))
             {
                 MessageBox.Show("Este producto ya fue agregado.");
+                return;
+            }
+
+            if(productoPorId.Stock < (int)numeroCantidad.Value)
+            {
+                MessageBox.Show("No hay suficiente stock de este producto.");
                 return;
             }
 
