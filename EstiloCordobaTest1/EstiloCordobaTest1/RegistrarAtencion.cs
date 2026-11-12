@@ -59,6 +59,7 @@ namespace EstiloCordobaPresentacion
                 {
                     cmbBarbero.DataSource = null;
                     btnRegistrar.Enabled = false;
+                    btnAceptar.Enabled = false;
 
                     MessageBox.Show("No hay barberos disponibles.");
                     return;
@@ -135,8 +136,16 @@ namespace EstiloCordobaPresentacion
                     nuevaAtencion.hora = TimeOnly.FromDateTime(DateTime.Now);
                     nuevaAtencion.hora = nuevaAtencion.hora.Add(TimeSpan.FromSeconds(-nuevaAtencion.hora.Second));
                     nuevaAtencion.idEstado = 1;
-                    nuevaAtencion.idBarbero = (int)cmbBarbero.SelectedValue;
                     nuevaAtencion.totalServicios = Convert.ToDecimal(txtTotalServicio.Text);
+
+                    if(cmbBarbero.SelectedValue != null) {
+                        nuevaAtencion.idBarbero = (int)cmbBarbero.SelectedValue;
+                    }
+                    else { 
+                        MessageBox.Show("No hay barberos disponibles.", "Aviso");
+                        serviciosSeleccionados.Clear();
+                        dgvServiciosTurno.DataSource = serviciosSeleccionados;
+                    }
 
                     turnoSeleccionado = true;
                 }
