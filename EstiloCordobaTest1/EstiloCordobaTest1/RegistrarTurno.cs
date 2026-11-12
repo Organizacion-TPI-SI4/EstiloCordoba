@@ -186,8 +186,8 @@ namespace EstiloCordobaPresentacion
             {
                 MessageBox.Show("Turno registrado correctamente.");
 
-                cmbCliente.SelectedIndex = 1;
-                cmbServicio.SelectedIndex = 1;
+                cmbCliente.SelectedIndex = 0;
+                cmbServicio.SelectedIndex = 0;
                 txtHora.Clear();
                 dtpFecha.Value = DateTime.Now;
                 serviciosSeleccionados.Clear();
